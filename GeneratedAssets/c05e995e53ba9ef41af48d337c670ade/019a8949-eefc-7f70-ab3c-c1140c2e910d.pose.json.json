@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8949-eefc-7f70-ab3c-c1140c2e910d.pose.json",
+    "prompt": "From standing break down door with hulk hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 451556765,
+    "w3CTraceId": "23a4093397fdeade42258222a41e56a3",
+    "isTrimmed": false
+}

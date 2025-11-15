@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894b-b0e4-7473-8852-5e83956561dd.pose.json",
+    "prompt": "jump and punch the air",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1964134127,
+    "w3CTraceId": "9816e22217533ab4c7734b7a62a9f2cf",
+    "isTrimmed": false
+}

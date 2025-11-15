@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8952-1688-7c52-b7d8-81c38abb004e.pose.json",
+    "prompt": "throw baseball",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1007919130,
+    "w3CTraceId": "64cc96d51e795c3f7a15715f607ace9a",
+    "isTrimmed": false
+}

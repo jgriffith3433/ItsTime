@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8952-c7e0-743a-86fd-e863633b46db.pose.json",
+    "prompt": "swing bat",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 864814361,
+    "w3CTraceId": "a6fe7490795a4e743aae3bca818f736f",
+    "isTrimmed": false
+}

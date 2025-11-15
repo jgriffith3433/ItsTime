@@ -1,0 +1,11 @@
+{
+    "asset": "60a3e95b8b0b0be4fb45e61019592e33",
+    "fileName": "019a8395-f11f-763a-831f-fea5d2c86deb.pose.json",
+    "prompt": "walk 2 steps",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1206805169,
+    "w3CTraceId": "8ddb73a28ed84cc3ec4ed3d8ecfbcbdd",
+    "isTrimmed": false
+}

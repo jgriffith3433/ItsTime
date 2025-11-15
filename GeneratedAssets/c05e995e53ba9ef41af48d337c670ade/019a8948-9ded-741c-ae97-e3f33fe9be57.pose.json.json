@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8948-9ded-741c-ae97-e3f33fe9be57.pose.json",
+    "prompt": "Step forward forward punch right hook hard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1103747070,
+    "w3CTraceId": "160d2feaa1eeecfa2da1544a98c52f18",
+    "isTrimmed": false
+}

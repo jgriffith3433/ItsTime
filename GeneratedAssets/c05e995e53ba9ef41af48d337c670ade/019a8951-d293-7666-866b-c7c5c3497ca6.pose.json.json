@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8951-d293-7666-866b-c7c5c3497ca6.pose.json",
+    "prompt": "throw arm",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 638484994,
+    "w3CTraceId": "4dc425ab3904cf551c13adcf97d8a919",
+    "isTrimmed": false
+}

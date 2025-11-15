@@ -1,0 +1,11 @@
+{
+    "asset": "f21310f190ecb8a4a857973b80935ec3",
+    "fileName": "019a838d-58a7-795c-aa41-30af9178e88b.pose.json",
+    "prompt": "In a rollercoaster seat",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1654363908,
+    "w3CTraceId": "aadca1e83c4f0fa0d1cc61ddff137831",
+    "isTrimmed": false
+}

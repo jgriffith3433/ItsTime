@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8951-9127-7813-8792-e58717535813.pose.json",
+    "prompt": "punch swing",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1560863224,
+    "w3CTraceId": "dcd965a5b808eeb5ae348a3c0d7e778a",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "60a3e95b8b0b0be4fb45e61019592e33",
+    "fileName": "019a8395-5b03-7340-b69e-ccc0db5e30d9.pose.json",
+    "prompt": "walk slowly loop",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2003030116,
+    "w3CTraceId": "cdb26094557acfa0febdcdb4e7eb6c82",
+    "isTrimmed": false
+}

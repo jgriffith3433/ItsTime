@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894e-ffde-7506-a947-abcae3391e05.pose.json",
+    "prompt": "swing miss and fall",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 901473954,
+    "w3CTraceId": "0c66547caba4f272d51130c5c87796b1",
+    "isTrimmed": false
+}

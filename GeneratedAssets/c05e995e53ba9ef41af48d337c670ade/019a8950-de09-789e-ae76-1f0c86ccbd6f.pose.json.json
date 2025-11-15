@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8950-de09-789e-ae76-1f0c86ccbd6f.pose.json",
+    "prompt": "punch and fall forward",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1265673086,
+    "w3CTraceId": "b7d5ed0dbebae1241afa953e84177bff",
+    "isTrimmed": false
+}

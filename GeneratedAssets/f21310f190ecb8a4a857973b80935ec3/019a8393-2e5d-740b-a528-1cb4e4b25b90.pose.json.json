@@ -1,0 +1,11 @@
+{
+    "asset": "f21310f190ecb8a4a857973b80935ec3",
+    "fileName": "019a8393-2e5d-740b-a528-1cb4e4b25b90.pose.json",
+    "prompt": "Walking very slowly in a heavy suit",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1464745223,
+    "w3CTraceId": "9735353632ff2a232ac73c2cff52355d",
+    "isTrimmed": false
+}

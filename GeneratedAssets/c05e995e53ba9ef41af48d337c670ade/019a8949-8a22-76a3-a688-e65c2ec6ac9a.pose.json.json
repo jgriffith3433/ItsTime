@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8949-8a22-76a3-a688-e65c2ec6ac9a.pose.json",
+    "prompt": "From standing lunge forward forward swing right hook hard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 353593078,
+    "w3CTraceId": "212fea71d8be56fe013bbc880f6edaeb",
+    "isTrimmed": false
+}

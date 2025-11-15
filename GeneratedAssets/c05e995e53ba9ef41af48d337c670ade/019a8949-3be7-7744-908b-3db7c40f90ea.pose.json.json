@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8949-3be7-7744-908b-3db7c40f90ea.pose.json",
+    "prompt": "Lunge forward forward swing right hook hard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 521406546,
+    "w3CTraceId": "75e09f1f662c8b66a03e8526a96b4dd4",
+    "isTrimmed": false
+}

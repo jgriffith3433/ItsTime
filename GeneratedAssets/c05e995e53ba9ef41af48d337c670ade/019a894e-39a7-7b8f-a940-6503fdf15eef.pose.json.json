@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894e-39a7-7b8f-a940-6503fdf15eef.pose.json",
+    "prompt": "jump really far forward punching",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 520729685,
+    "w3CTraceId": "9943ebb024cf0d0aee63f3fbaca2e966",
+    "isTrimmed": false
+}

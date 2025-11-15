@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894d-3640-7938-b752-2040a8e78530.pose.json",
+    "prompt": "jump wildly punching",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2106774427,
+    "w3CTraceId": "b999ece20c68ab4024efd18ff76b85f4",
+    "isTrimmed": false
+}

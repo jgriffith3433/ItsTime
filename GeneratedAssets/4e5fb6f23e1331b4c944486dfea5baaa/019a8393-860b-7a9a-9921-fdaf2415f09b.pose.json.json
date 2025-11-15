@@ -1,0 +1,11 @@
+{
+    "asset": "f21310f190ecb8a4a857973b80935ec3",
+    "fileName": "019a8393-860b-7a9a-9921-fdaf2415f09b.pose.json",
+    "prompt": "Walking very slowly",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1853060742,
+    "w3CTraceId": "dc6dff9a608747f65b59fc7ca6c9840f",
+    "isTrimmed": false
+}

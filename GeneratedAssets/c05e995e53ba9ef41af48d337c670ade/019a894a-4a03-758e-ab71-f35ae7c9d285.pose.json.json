@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894a-4a03-758e-ab71-f35ae7c9d285.pose.json",
+    "prompt": "From standing break down door shoulder",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2127355015,
+    "w3CTraceId": "dfbe0e3a46f704719e2c9cba715f635d",
+    "isTrimmed": false
+}

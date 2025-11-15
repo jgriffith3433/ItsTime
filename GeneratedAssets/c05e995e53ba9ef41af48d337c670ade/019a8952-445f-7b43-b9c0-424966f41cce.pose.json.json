@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8952-445f-7b43-b9c0-424966f41cce.pose.json",
+    "prompt": "throw baseball far",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1095789324,
+    "w3CTraceId": "e78ecdf6605de5bd191e834dc0c059fb",
+    "isTrimmed": false
+}

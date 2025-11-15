@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894a-d03c-716d-bf76-b4589ce83d36.pose.json",
+    "prompt": "break down door with hand",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1334830976,
+    "w3CTraceId": "a010d108315e34d0de52f6ea7491998e",
+    "isTrimmed": false
+}

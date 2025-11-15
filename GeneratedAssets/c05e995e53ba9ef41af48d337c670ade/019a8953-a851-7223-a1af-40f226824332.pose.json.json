@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8953-a851-7223-a1af-40f226824332.pose.json",
+    "prompt": "Run and kick",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1388033783,
+    "w3CTraceId": "aed40b05da1aca90f68cdfa36a40c4f8",
+    "isTrimmed": false
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a894c-7c90-71cc-a891-1fade93a917e.pose.json",
+    "prompt": "jump and punch",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1532499308,
+    "w3CTraceId": "e94d41c0bdb8f9e660f8b96555bb6ad8",
+    "isTrimmed": false
+}

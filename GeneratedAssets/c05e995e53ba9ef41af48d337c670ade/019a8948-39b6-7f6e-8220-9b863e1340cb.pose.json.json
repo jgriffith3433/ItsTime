@@ -1,0 +1,11 @@
+{
+    "asset": "c05e995e53ba9ef41af48d337c670ade",
+    "fileName": "019a8948-39b6-7f6e-8220-9b863e1340cb.pose.json",
+    "prompt": "Punch forward hard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1812774966,
+    "w3CTraceId": "dbe31e2c52623253ef2aeda2d9484b4b",
+    "isTrimmed": false
+}
