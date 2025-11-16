@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Disables dynamic LOD adjustments and forces LOD0 (highest quality) when player enters the trigger.
@@ -18,6 +20,8 @@ public class LODRoomTrigger : MonoBehaviour
     [SerializeField] private bool forceLOD0 = true;
     
     private bool playerInside = false;
+    
+    public DynamicLOD[] DynamicLODs => dynamicLODs;
     
     private void OnValidate()
     {
@@ -125,50 +129,61 @@ public class LODRoomTrigger : MonoBehaviour
     
     // Helper method to find all DynamicLOD components inside the box collider bounds
     [ContextMenu("Find All DynamicLOD Components Inside Box Collider")]
-    private void FindDynamicLODsInsideBoxCollider()
+    public void FindDynamicLODsInsideBoxCollider()
     {
-        BoxCollider boxCollider = GetComponent<BoxCollider>();
-        if (boxCollider == null)
+        Collider collider = GetComponent<Collider>();
+        if (collider == null)
         {
-            Debug.LogWarning($"[LODRoomTrigger] No BoxCollider found on '{gameObject.name}'. This function requires a BoxCollider.");
+            Debug.LogWarning($"[LODRoomTrigger] No Collider found on '{gameObject.name}'.");
             return;
         }
         
-        // Calculate world-space bounds of the box collider
-        Bounds bounds = new Bounds(
-            transform.TransformPoint(boxCollider.center),
-            Vector3.zero
-        );
-        
-        // Transform the box collider's size to world space
-        Vector3 worldSize = Vector3.Scale(boxCollider.size, transform.lossyScale);
-        bounds.size = worldSize;
+        // Get world-space bounds of the collider
+        Bounds bounds = collider.bounds;
         
         // Find all DynamicLOD components in the scene
         DynamicLOD[] allDynamicLODs = FindObjectsOfType<DynamicLOD>();
-        System.Collections.Generic.List<DynamicLOD> lodsInside = new System.Collections.Generic.List<DynamicLOD>();
+        List<DynamicLOD> lodsInside = new List<DynamicLOD>();
         
         foreach (var dynamicLOD in allDynamicLODs)
         {
             if (dynamicLOD == null) continue;
             
-            // Check if the object's position is inside the bounds
-            Vector3 objectPosition = dynamicLOD.transform.position;
-            
-            // For more accurate checking, we can use the object's bounds if it has a renderer
-            Renderer renderer = dynamicLOD.GetComponent<Renderer>();
-            if (renderer != null)
+            // Get the LODGroup component
+            LODGroup lodGroup = dynamicLOD.GetComponent<LODGroup>();
+            if (lodGroup != null)
             {
-                // Check if renderer bounds intersect with trigger bounds
-                if (bounds.Intersects(renderer.bounds))
+                // Check if the LODGroup's center point is inside the bounds
+                Vector3 lodCenter = lodGroup.transform.TransformPoint(lodGroup.localReferencePoint);
+                
+                if (bounds.Contains(lodCenter))
                 {
                     lodsInside.Add(dynamicLOD);
+                    continue;
                 }
+            }
+            
+            // Fallback: check all renderers in the LODGroup
+            Renderer[] renderers = dynamicLOD.GetComponentsInChildren<Renderer>();
+            bool hasIntersection = false;
+            
+            foreach (var renderer in renderers)
+            {
+                if (bounds.Intersects(renderer.bounds))
+                {
+                    hasIntersection = true;
+                    break;
+                }
+            }
+            
+            if (hasIntersection)
+            {
+                lodsInside.Add(dynamicLOD);
             }
             else
             {
-                // Fallback to point-in-bounds check for objects without renderers
-                if (bounds.Contains(objectPosition))
+                // Last fallback: check the transform position
+                if (bounds.Contains(dynamicLOD.transform.position))
                 {
                     lodsInside.Add(dynamicLOD);
                 }
@@ -176,7 +191,7 @@ public class LODRoomTrigger : MonoBehaviour
         }
         
         dynamicLODs = lodsInside.ToArray();
-        Debug.Log($"[LODRoomTrigger] Found {dynamicLODs.Length} DynamicLOD components inside box collider bounds of '{gameObject.name}'");
+        Debug.Log($"[LODRoomTrigger] Found {dynamicLODs.Length} DynamicLOD components inside collider bounds of '{gameObject.name}'");
         
         #if UNITY_EDITOR
         UnityEditor.EditorUtility.SetDirty(this);
@@ -196,6 +211,7 @@ public class LODRoomTrigger : MonoBehaviour
                 BoxCollider box = col as BoxCollider;
                 Gizmos.matrix = transform.localToWorldMatrix;
                 Gizmos.DrawCube(box.center, box.size);
+                Gizmos.matrix = Matrix4x4.identity;
             }
             else if (col is SphereCollider)
             {
@@ -207,17 +223,54 @@ public class LODRoomTrigger : MonoBehaviour
     
     private void OnDrawGizmosSelected()
     {
-        // Draw lines to all assigned DynamicLOD components
+        // Get all covered DynamicLODs from all LODRoomTriggers in the scene
+        HashSet<DynamicLOD> allCoveredLODs = new HashSet<DynamicLOD>();
+        
+        #if UNITY_EDITOR
+        LODRoomTrigger[] allTriggers = FindObjectsOfType<LODRoomTrigger>();
+        foreach (var trigger in allTriggers)
+        {
+            if (trigger.dynamicLODs != null)
+            {
+                foreach (var lod in trigger.dynamicLODs)
+                {
+                    if (lod != null)
+                    {
+                        allCoveredLODs.Add(lod);
+                    }
+                }
+            }
+        }
+        #endif
+        
+        // Draw lines to assigned DynamicLOD components in this trigger
         if (dynamicLODs != null)
         {
-            Gizmos.color = Color.cyan;
             foreach (var dynamicLOD in dynamicLODs)
             {
                 if (dynamicLOD != null)
                 {
+                    // Draw line in cyan from trigger to LOD
+                    Gizmos.color = Color.cyan;
                     Gizmos.DrawLine(transform.position, dynamicLOD.transform.position);
+                    
+                    // Draw sphere at LOD position in red (covered)
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(dynamicLOD.transform.position, 0.5f);
                 }
             }
         }
+        
+        // Draw all other covered LODs in the scene (not in this trigger) in darker red
+        #if UNITY_EDITOR
+        Gizmos.color = new Color(0.5f, 0, 0, 0.5f); // Darker red
+        foreach (var coveredLOD in allCoveredLODs)
+        {
+            if (coveredLOD != null && (dynamicLODs == null || !dynamicLODs.Contains(coveredLOD)))
+            {
+                Gizmos.DrawSphere(coveredLOD.transform.position, 0.3f);
+            }
+        }
+        #endif
     }
 }

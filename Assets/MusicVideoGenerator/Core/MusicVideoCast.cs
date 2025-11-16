@@ -252,6 +252,69 @@ namespace MusicVideoGenerator
                 }
             }
         }
+        
+        [ContextMenu("Auto-Populate From LODGroups")]
+        private void AutoPopulateFromLODGroups()
+        {
+            // Clear all cast members
+            mainCast.Clear();
+            supportingCast.Clear();
+            spotlightCast.Clear();
+            
+            // Find all LODGroup components in the scene
+            LODGroup[] lodGroups = FindObjectsOfType<LODGroup>();
+            
+            if (lodGroups.Length == 0)
+            {
+                Debug.LogWarning("[MusicVideoCast] No LODGroup components found in the scene");
+                return;
+            }
+            
+            // Shuffle the array for random assignment
+            System.Random rng = new System.Random();
+            lodGroups = lodGroups.OrderBy(x => rng.Next()).ToArray();
+            
+            // Distribute LODGroups across the three cast categories
+            int totalGroups = lodGroups.Length;
+            int mainCastCount = Mathf.CeilToInt(totalGroups / 3f);
+            int supportingCastCount = Mathf.CeilToInt(totalGroups / 3f);
+            // Remaining go to spotlight cast
+            
+            int index = 0;
+            
+            // Assign to main cast
+            for (int i = 0; i < mainCastCount && index < totalGroups; i++, index++)
+            {
+                mainCast.Add(new CastMember
+                {
+                    gameObject = lodGroups[index].gameObject,
+                    role = CastRole.Ambient
+                });
+            }
+            
+            // Assign to supporting cast
+            for (int i = 0; i < supportingCastCount && index < totalGroups; i++, index++)
+            {
+                supportingCast.Add(new CastMember
+                {
+                    gameObject = lodGroups[index].gameObject,
+                    role = CastRole.Ambient
+                });
+            }
+            
+            // Assign remaining to spotlight cast
+            while (index < totalGroups)
+            {
+                spotlightCast.Add(new CastMember
+                {
+                    gameObject = lodGroups[index].gameObject,
+                    role = CastRole.Ambient
+                });
+                index++;
+            }
+            
+            Debug.Log($"[MusicVideoCast] Auto-populated from {totalGroups} LODGroups: {mainCast.Count} main, {supportingCast.Count} supporting, {spotlightCast.Count} spotlight - all with Ambient role");
+        }
         #endregion
     }
     

@@ -10,6 +10,7 @@ namespace MobileControllerFramework
         [Header("Controller Settings")]
         [Min(0)] public float moveSpeed = 8f;
         [Min(0)] public float smoothMovement = 0.025f;
+        [Range(0, 1)] public float deceleration = 0.9f; // Higher = stops faster (0 = slides forever, 1 = instant stop)
         [Min(0)] public float rotationSpeed = 10f; // Speed at which character rotates to face movement direction
         public float normalHeight = 2f;
         public float crouchHeight = 1f;
@@ -75,8 +76,11 @@ namespace MobileControllerFramework
 
             // Apply movement
             Vector3 targetVelocity = inputDir * moveSpeed;
-            moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, smoothMovement);
-            moveVelocity.z = Mathf.Lerp(moveVelocity.z, targetVelocity.z, smoothMovement);
+            
+            // If no input, apply deceleration to stop faster
+            float lerpSpeed = input.magnitude > 0.1f ? smoothMovement : deceleration;
+            moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, lerpSpeed);
+            moveVelocity.z = Mathf.Lerp(moveVelocity.z, targetVelocity.z, lerpSpeed);
 
             // Apply gravity
             if (characterController.isGrounded && moveVelocity.y < 0) moveVelocity.y = -1f;
