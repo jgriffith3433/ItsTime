@@ -102,6 +102,17 @@ namespace MusicVideoGenerator
                 }
             }
             
+            // Delete generated lighting
+            if (director.gameObject != null)
+            {
+                Transform lightingRoot = director.gameObject.transform.Find("Concert_Lighting");
+                if (lightingRoot != null)
+                {
+                    Object.DestroyImmediate(lightingRoot.gameObject);
+                    Debug.Log("🗑️ Removed concert lighting");
+                }
+            }
+            
             // Save and refresh
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();

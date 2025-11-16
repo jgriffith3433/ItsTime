@@ -112,16 +112,16 @@ namespace MusicVideoGenerator
                     break;
                 
                 case CastRole.BackgroundSupport:
-                    config.movementIntensity = 0.5f;
-                    config.movementRange = 5f;
+                    config.movementIntensity = 0.2f;
+                    config.movementRange = 2f;
                     config.canMove = true;
                     config.canRotate = true;
                     config.canScale = true;
-                    config.rotationSpeed = 90f;
-                    config.scaleMin = 0.8f;
-                    config.scaleMax = 1.5f;
+                    config.rotationSpeed = 30f;
+                    config.scaleMin = 0.5f;
+                    config.scaleMax = 0.8f;
                     config.focusProbability = 0.2f;
-                    config.energyMultiplier = 0.8f;
+                    config.energyMultiplier = 0.5f;
                     config.primaryColor = new Color(0.5f, 0.5f, 1f); // Lavender
                     config.secondaryColor = new Color(0.7f, 0.7f, 1f); // Light lavender
                     break;

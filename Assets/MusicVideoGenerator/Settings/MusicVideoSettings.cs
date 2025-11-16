@@ -47,6 +47,9 @@ namespace MusicVideoGenerator
         public float energyThreshold = 0.5f;
         
         [Header("📏 Scaling")]
+        [Tooltip("Enable scale animations")]
+        public bool enableScaleAnimation = true;
+        
         [Range(0.1f, 10f)]
         [Tooltip("Global scale transition speed")]
         public float scaleSpeed = 2f;
@@ -57,6 +60,24 @@ namespace MusicVideoGenerator
         [Range(0f, 2f)]
         [Tooltip("Beat pulse intensity")]
         public float beatPulseIntensity = 0.5f;
+        
+        [Header("📍 Movement Boundaries")]
+        [Tooltip("Constrain movement to defined area")]
+        public bool constrainMovement = true;
+        
+        [Tooltip("Maximum movement area (world space)")]
+        public Vector3 movementBounds = new Vector3(10f, 10f, 10f);
+        
+        [Tooltip("Reduce movement intensity globally")]
+        [Range(0f, 2f)]
+        public float movementIntensityMultiplier = 1f;
+        
+        [Header("🎬 Stage Dimensions")]
+        [Tooltip("Total performance space bounds for camera and lighting placement")]
+        public Vector3 stageBounds = new Vector3(10f, 10f, 10f);
+        
+        [Tooltip("Stage center position in world space")]
+        public Vector3 stageCenter = Vector3.zero;
         
         [Header("🎨 Color Effects")]
         [Tooltip("Flash on onsets")]

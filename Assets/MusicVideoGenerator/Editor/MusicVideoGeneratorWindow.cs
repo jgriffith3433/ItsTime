@@ -16,7 +16,7 @@ namespace MusicVideoGenerator
         private MusicVideoSettings settings;
         private Vector2 scrollPosition;
         
-        [MenuItem("Tools/Music Video Generator")]
+        [MenuItem("Tools/Music Video Generator/Music Video Generator")]
         public static void ShowWindow()
         {
             var window = GetWindow<MusicVideoGeneratorWindow>("Music Video Generator");

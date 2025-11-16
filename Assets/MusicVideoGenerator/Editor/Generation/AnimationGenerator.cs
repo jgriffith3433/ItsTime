@@ -161,6 +161,17 @@ namespace MusicVideoGenerator
                     time,
                     random
                 );
+                
+                // Apply movement bounds
+                if (settings.constrainMovement)
+                {
+                    targetPos = ClampToBounds(targetPos, initialTransform.position, settings.movementBounds);
+                }
+                
+                // Apply global movement intensity multiplier
+                Vector3 movementOffset = (targetPos - initialTransform.position) * settings.movementIntensityMultiplier;
+                targetPos = initialTransform.position + movementOffset;
+                
                 state.position = Vector3.Lerp(state.position, targetPos, config.movementIntensity * timeStep);
             }
             
@@ -178,18 +189,21 @@ namespace MusicVideoGenerator
             // SCALE
             if (config.canScale)
             {
-                float targetScale = Mathf.Lerp(config.scaleMin, config.scaleMax, intensity);
-                if (isFocused) targetScale *= FOCUS_SCALE_MULTIPLIER;
+                float scaleMultiplier = Mathf.Lerp(config.scaleMin, config.scaleMax, intensity);
+                if (isFocused) scaleMultiplier *= FOCUS_SCALE_MULTIPLIER;
                 
                 // Beat pulse
                 if (settings.enableBeatPulse && analysisData.IsBeatAt(time))
                 {
-                    targetScale += settings.beatPulseIntensity * intensity;
+                    scaleMultiplier += settings.beatPulseIntensity * intensity;
                 }
+                
+                // Scale relative to initial scale, not Vector3.one
+                Vector3 targetScale = initialTransform.scale * scaleMultiplier;
                 
                 state.scale = Vector3.Lerp(
                     state.scale,
-                    Vector3.one * targetScale,
+                    targetScale,
                     settings.scaleSpeed * timeStep
                 );
             }
@@ -275,6 +289,16 @@ namespace MusicVideoGenerator
                 Mathf.Cos(angle) * orbitRadius,
                 Mathf.Sin(time * 0.5f) * orbitRadius * 0.3f,
                 Mathf.Sin(angle) * orbitRadius
+            );
+        }
+        
+        private static Vector3 ClampToBounds(Vector3 position, Vector3 center, Vector3 bounds)
+        {
+            Vector3 halfBounds = bounds * 0.5f;
+            return new Vector3(
+                Mathf.Clamp(position.x, center.x - halfBounds.x, center.x + halfBounds.x),
+                Mathf.Clamp(position.y, center.y - halfBounds.y, center.y + halfBounds.y),
+                Mathf.Clamp(position.z, center.z - halfBounds.z, center.z + halfBounds.z)
             );
         }
         

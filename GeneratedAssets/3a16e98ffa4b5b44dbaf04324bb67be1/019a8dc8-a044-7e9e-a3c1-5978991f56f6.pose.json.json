@@ -1,0 +1,11 @@
+{
+    "asset": "3a16e98ffa4b5b44dbaf04324bb67be1",
+    "fileName": "019a8dc8-a044-7e9e-a3c1-5978991f56f6.pose.json",
+    "prompt": "dancing",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 670286329,
+    "w3CTraceId": "190f509f6a470560b36e64b22ade51f8",
+    "isTrimmed": false
+}

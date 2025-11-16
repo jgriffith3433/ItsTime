@@ -107,6 +107,24 @@ namespace MusicVideoGenerator
             string timelineFolder = TimelineUtilities.GetTimelineFolder(timeline);
             string clipsFolder = TimelineUtilities.EnsureClipsFolderExists(timelineFolder);
             
+            // Generate concert lighting system
+            ConcertLightingGenerator.GenerateConcertLighting(
+                cast,
+                timeline,
+                cast.playableDirector,
+                storyBeats,
+                musicSections,
+                analysisData,
+                settings,
+                random,
+                clipsFolder
+            );
+            
+            if (settings.showDebugInfo)
+            {
+                Debug.Log($"💡 Concert lighting generated");
+            }
+            
             int trackCount = 0;
             for (int i = 0; i < allCast.Count; i++)
             {
@@ -124,16 +142,35 @@ namespace MusicVideoGenerator
                     animator = member.gameObject.AddComponent<Animator>();
                 }
                 
-                // Generate animation clip
-                var clip = AnimationGenerator.GenerateAnimationClip(
-                    member,
-                    i,
-                    storyBeats,
-                    musicSections,
-                    analysisData,
-                    settings,
-                    random
-                );
+                // Generate animation clip - use shape-aware animation if ShapeIdentity exists
+                var shapeIdentity = member.gameObject.GetComponent<ShapeIdentity>();
+                AnimationClip clip;
+                
+                if (shapeIdentity != null)
+                {
+                    clip = ShapeAwareAnimationGenerator.GenerateShapeAwareClip(
+                        member,
+                        i,
+                        storyBeats,
+                        musicSections,
+                        analysisData,
+                        settings,
+                        random
+                    );
+                }
+                else
+                {
+                    // Fallback to generic animation
+                    clip = AnimationGenerator.GenerateAnimationClip(
+                        member,
+                        i,
+                        storyBeats,
+                        musicSections,
+                        analysisData,
+                        settings,
+                        random
+                    );
+                }
                 
                 // Save clip
                 string clipPath = TimelineUtilities.SaveAnimationClip(clip, clipsFolder);

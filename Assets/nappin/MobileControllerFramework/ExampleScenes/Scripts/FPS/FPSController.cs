@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Playables;
 
 
 namespace MobileControllerFramework
@@ -7,7 +8,11 @@ namespace MobileControllerFramework
     [RequireComponent(typeof(CharacterController))]
     public class FPSController : MonoBehaviour
     {
+        [SerializeField] private PlayableDirector playableDirector;
+
         [Header("Controller Settings")]
+        [Tooltip("Enable or disable character movement and input processing")]
+        public bool controlsEnabled = true;
         [Min(0)] public float moveSpeed = 8f;
         [Min(0)] public float smoothMovement = 0.025f;
         [Range(0, 1)] public float deceleration = 0.9f; // Higher = stops faster (0 = slides forever, 1 = instant stop)
@@ -35,6 +40,7 @@ namespace MobileControllerFramework
         private bool isCrouched = false;
         private bool isPunching = false;
         private bool punchedWhiteboard = false;
+        private bool wasControlsEnabled = true;
 
         #region Setup
 
@@ -54,13 +60,20 @@ namespace MobileControllerFramework
 
         private void Update()
         {
+            // Reset velocity when controls are disabled
+            if (!controlsEnabled && wasControlsEnabled)
+            {
+                moveVelocity = Vector3.zero;
+            }
+            wasControlsEnabled = controlsEnabled;
+            
             HandleMovement();
         }
 
 
         private void HandleMovement()
         {
-            if (analog == null || cameraTransform == null) return;
+            if (!controlsEnabled || analog == null || cameraTransform == null) return;
 
             Vector2 input = analog.GetStickPosition();
             Vector3 inputDir = cameraTransform.forward * input.y + cameraTransform.right * input.x;
@@ -164,6 +177,7 @@ namespace MobileControllerFramework
             forceDir.Normalize();
             whiteboardRigidbody.AddForce(forceDir * 8f, ForceMode.Impulse);
             yield return new WaitForSeconds(1f);
+            playableDirector.Play();
             whiteboardCollider.enabled = false;
             whiteboardRigidbody.isKinematic = true; // ensure physics is enabled
         }
