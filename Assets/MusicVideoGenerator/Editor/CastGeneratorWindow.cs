@@ -404,10 +404,14 @@ namespace MusicVideoGenerator
         {
             PrimitiveType[] shapes = { PrimitiveType.Cube, PrimitiveType.Sphere, PrimitiveType.Cylinder };
             GameObject obj = GameObject.CreatePrimitive(shapes[rng.Next(shapes.Length)]);
+            DestroyImmediate(obj.GetComponent<Collider>());
             obj.name = $"{theme}_Background_{index}";
             obj.transform.SetParent(parent);
             
-            float radius = 15f;
+            // Spread across a larger varied radius so they don't all start at the same distance
+            float minRadius = 12f;
+            float maxRadius = 18f;
+            float radius = (float)(rng.NextDouble() * (maxRadius - minRadius) + minRadius);
             float angle = (index / 12f) * Mathf.PI * 2f + (float)(rng.NextDouble() * 0.5);
             
             obj.transform.localPosition = new Vector3(
@@ -495,22 +499,11 @@ namespace MusicVideoGenerator
             
             mat.SetFloat("_Mode", 3); // Transparent rendering mode
             mat.SetOverrideTag("RenderType", "Transparent");
-            mat.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            mat.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            mat.SetInt("_ZWrite", 0);
-            mat.DisableKeyword("_ALPHATEST_ON");
-            mat.EnableKeyword("_ALPHABLEND_ON");
-            mat.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            mat.renderQueue = 3000;
             
             // Set color with reasonable alpha
-            spotColor.a = 0.5f; // More visible (50% opacity)
+            spotColor.a = 0.8f; // More visible (50% opacity)
             mat.color = spotColor;
-            mat.SetFloat("_Metallic", 0.5f);
-            mat.SetFloat("_Glossiness", 0.8f);
-            mat.EnableKeyword("_EMISSION");
             mat.SetColor("_EmissionColor", emissionColor);
-            mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
             obj.GetComponent<Renderer>().material = mat;
             
             return obj;

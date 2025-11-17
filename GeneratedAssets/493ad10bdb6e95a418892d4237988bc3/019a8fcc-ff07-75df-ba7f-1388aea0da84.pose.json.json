@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fcc-ff07-75df-ba7f-1388aea0da84.pose.json",
+    "prompt": "jump up and down over and over",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 548204843,
+    "w3CTraceId": "cf49b5e29d030c17bcc89ea8341f8d86",
+    "isTrimmed": false
+}

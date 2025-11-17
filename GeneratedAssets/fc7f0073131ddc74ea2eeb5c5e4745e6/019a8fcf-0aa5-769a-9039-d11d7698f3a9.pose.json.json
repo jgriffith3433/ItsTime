@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fcf-0aa5-769a-9039-d11d7698f3a9.pose.json",
+    "prompt": "waving",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1519712075,
+    "w3CTraceId": "af5ca4281e7c5373fc5cd4e69a5d0126",
+    "isTrimmed": false
+}

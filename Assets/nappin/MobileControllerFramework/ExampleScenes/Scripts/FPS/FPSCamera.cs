@@ -23,6 +23,8 @@ namespace MobileControllerFramework
         private Vector3 currentRotation;
         private Vector3 targetRotation;
         private Vector2 moveMultiplier;
+        private Vector3 originalPosition;
+        private Quaternion originalRotation;
 
 
         /**/
@@ -38,6 +40,9 @@ namespace MobileControllerFramework
 
             if (touchDrag == null)
                 Debug.LogWarning("FPSCamera: TouchDrag reference is missing.");
+            
+            originalPosition = transform.localPosition;
+            originalRotation = transform.localRotation;
         }
 
         #endregion
@@ -56,6 +61,20 @@ namespace MobileControllerFramework
             if (touchDrag == null) return;
 
             Vector2 rotationInput = touchDrag.GetTouchDragMovement();
+            // if no longer touching, lerp to original position over time
+            if (!touchDrag.GetTouchDragState().Equals(TouchDrag.TouchDragState.touch))
+            {
+                transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * smoothness);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * smoothness);
+                targetRotation = originalRotation.eulerAngles;
+                currentRotation = targetRotation;
+                return;
+            }
+            
+            if (rotationInput.magnitude < 75f)
+            {
+                return;
+            }
 
             // Apply input multipliers and rotation speed
             targetRotation.x += rotationInput.y * moveMultiplier.y * rotationSpeed;

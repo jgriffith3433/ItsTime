@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fce-4f15-75e5-88e7-74bd67e2b2b9.pose.json",
+    "prompt": "more gestures",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 329989890,
+    "w3CTraceId": "8a671b8ae7abd8f3be246fc409cafb47",
+    "isTrimmed": false
+}

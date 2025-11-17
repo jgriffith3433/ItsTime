@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fc7-8e9c-7407-aa17-d0f9bcc14aa8.pose.json",
+    "prompt": "spinning really fast over and over like crazy",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 408133073,
+    "w3CTraceId": "11cffeb57ca48bb8d27de405d2c2862d",
+    "isTrimmed": false
+}

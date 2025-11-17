@@ -67,6 +67,92 @@ namespace MusicVideoGenerator
         }
         
         /// <summary>
+        /// Remove all colliders from cast member GameObjects to improve performance.
+        /// </summary>
+        [ContextMenu("Remove All Colliders from Cast")]
+        private void RemoveAllColliders()
+        {
+            int colliderCount = 0;
+            
+            // Get all colliders in children
+            Collider[] colliders = GetComponentsInChildren<Collider>(true);
+            
+            foreach (Collider collider in colliders)
+            {
+                // Don't destroy colliders on the cast root itself
+                if (collider.gameObject != gameObject)
+                {
+                    #if UNITY_EDITOR
+                    UnityEditor.Undo.DestroyObjectImmediate(collider);
+                    #else
+                    Destroy(collider);
+                    #endif
+                    colliderCount++;
+                }
+            }
+            
+            Debug.Log($"[MusicVideoCast] Removed {colliderCount} colliders from cast members");
+        }
+
+        /// <summary>
+        /// Find all children with the Name "Sphere" and get their material and increase the alpha on the Albedo + .1
+        /// </summary>
+        [ContextMenu("Increase Alpha on 'Sphere' Materials")]
+        private void IncreaseAlphaOnSphereMaterials()
+        {
+            int modifiedCount = 0;
+            
+            // Get all renderers in children
+            Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
+            
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.gameObject.name.Contains("Sphere"))
+                {
+                    Material mat = renderer.sharedMaterial;
+                    if (mat != null && mat.HasProperty("_Color"))
+                    {
+                        Color color = mat.color;
+                        color.a = Mathf.Clamp01(color.a + 0.1f);
+                        mat.color = color;
+                        modifiedCount++;
+                    }
+                }
+            }
+            
+            Debug.Log($"[MusicVideoCast] Increased alpha on {modifiedCount} 'Sphere' materials");
+        }
+
+        /// <summary>
+        /// Find all children with the Name "Sphere" and get their material and decrease the alpha on the Albedo - .1
+        /// </summary>
+        [ContextMenu("Decrease Alpha on 'Sphere' Materials")]
+        private void DecreaseAlphaOnSphereMaterials()
+        {
+            int modifiedCount = 0;
+            
+            // Get all renderers in children
+            Renderer[] renderers = GetComponentsInChildren<Renderer>(true);
+            
+            foreach (Renderer renderer in renderers)
+            {
+                if (renderer.gameObject.name.Contains("Sphere"))
+                {
+                    Material mat = renderer.sharedMaterial;
+                    if (mat != null && mat.HasProperty("_Color"))
+                    {
+                        Color color = mat.color;
+                        color.a = Mathf.Clamp01(color.a - 0.1f);
+                        mat.color = color;
+                        modifiedCount++;
+                    }
+                }
+            }
+            
+            Debug.Log($"[MusicVideoCast] Decreased alpha on {modifiedCount} 'Sphere' materials");
+        }
+        
+        /// <summary>
         /// Validate the cast setup and return validation results.
         /// </summary>
         public CastValidationResult Validate()

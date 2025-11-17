@@ -1,0 +1,11 @@
+{
+    "asset": "f9a66e715c61f2745909118c7d95a2cf",
+    "fileName": "019a8fb8-ce1f-7ee0-b6f8-41cbe07062d8.pose.json",
+    "prompt": "stomping the ground",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1261461078,
+    "w3CTraceId": "3a418e56c1208948983100546c8697eb",
+    "isTrimmed": false
+}

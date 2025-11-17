@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fc7-1bdd-7602-b908-f468026f3777.pose.json",
+    "prompt": "spinning like crazy",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1227499401,
+    "w3CTraceId": "e09c5b88fcceafff2fc060096aa1566d",
+    "isTrimmed": false
+}

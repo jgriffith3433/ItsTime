@@ -340,36 +340,152 @@ namespace MusicVideoGenerator
                 var rotY = new AnimationCurve();
                 var rotZ = new AnimationCurve();
                 var rotW = new AnimationCurve();
+                var colorR = new AnimationCurve();
+                var colorG = new AnimationCurve();
+                var colorB = new AnimationCurve();
                 
-                // Lasers sweep and flash
-                float sweepSpeed = 0.5f + (float)random.NextDouble() * 0.5f;
+                // Each laser has a personality - some are anxious, some are calm
+                float laserPersonality = (float)random.NextDouble(); // 0=calm, 1=erratic
+                float baseSweepSpeed = 0.3f + laserPersonality * 0.7f;
                 Quaternion initialRot = laser.transform.localRotation;
+                
+                StoryBeat previousBeat = storyBeats[0];
                 
                 for (float t = 0; t <= analysisData.maxTime; t += timeStep)
                 {
                     var section = musicSections.FirstOrDefault(s => t >= s.startTime && t < s.endTime);
-                    float intensity = section.intensity > 0 ? section.intensity : 0.3f;
+                    var beat = storyBeats.FirstOrDefault(b => t >= b.time);
+                    if (beat.time == 0) beat = storyBeats[0];
                     
-                    // Lasers flash less often with higher intensity
-                    if (analysisData.IsBeatAt(t, 0.3f)) // Wider window = less frequent
+                    float intensity = section.intensity > 0 ? section.intensity : 0.5f;
+                    float timeSinceBeatStart = t - beat.time;
+                    
+                    // EMOTIONAL LASER BEHAVIOR - tells a story through light and movement
+                    float emotionalIntensity = 0f;
+                    float emotionalSpeed = 1f;
+                    float emotionalRange = 1f; // How wide the sweep
+                    Color emotionalColor = Color.white;
+                    bool flickering = false;
+                    
+                    switch (beat.moment)
                     {
-                        intensityCurve.AddKey(t, 5f * intensity); // Brighter
-                    }
-                    else
-                    {
-                        intensityCurve.AddKey(t, 1f); // Higher ambient glow
+                        case StoryMoment.Introduction:
+                            // "Awakening... single beams of light emerge from darkness"
+                            float introFade = Mathf.Min(1f, timeSinceBeatStart / 6f);
+                            emotionalIntensity = Mathf.Lerp(0.01f, 0.4f, Mathf.SmoothStep(0, 1, introFade));
+                            emotionalSpeed = 0.3f; // Very slow, contemplative
+                            emotionalRange = Mathf.Lerp(0f, 30f, introFade); // Start narrow, slowly widen
+                            emotionalColor = Color.Lerp(Color.white * 0.3f, Color.cyan, introFade); // Dawn colors
+                            break;
+                            
+                        case StoryMoment.Rising:
+                            // "Searching... the lights search for something, sweeping with purpose"
+                            emotionalIntensity = 0.4f + intensity * 0.3f;
+                            emotionalSpeed = 0.8f + intensity * 0.5f; // Gradually speeding up
+                            emotionalRange = 45f + Mathf.Sin(t * 1.5f) * 15f; // Hunting pattern
+                            emotionalColor = Color.Lerp(Color.cyan, Color.yellow, intensity); // Building warmth
+                            
+                            // Occasional sweeps across the space
+                            if (analysisData.IsBeatAt(t, 0.2f))
+                            {
+                                emotionalIntensity = 0.8f;
+                            }
+                            break;
+                            
+                        case StoryMoment.Conflict:
+                            // "Panic! The lights slash chaotically, cutting through space"
+                            emotionalIntensity = 0.4f + Mathf.Sin(t * 6f + i * 1.5f) * 0.3f; // Erratic flickering
+                            emotionalSpeed = 2f + Mathf.Sin(t * 3f) * 1.5f; // Frantic speed changes
+                            emotionalRange = 70f + Mathf.Sin(t * 5f + i) * 40f; // Wild unpredictable sweeps
+                            emotionalColor = Color.Lerp(Color.red, Color.magenta, Mathf.Sin(t * 4f) * 0.5f + 0.5f); // Alarm colors
+                            flickering = true;
+                            break;
+                            
+                        case StoryMoment.Climax:
+                            // "EXPLOSION! All beams converge then burst outward in celebration"
+                            float climaxPhase = (t * 4f + i * 0.3f) % (Mathf.PI * 2f);
+                            bool converging = Mathf.Sin(climaxPhase) > 0;
+                            
+                            emotionalIntensity = 0.7f + intensity * 0.3f; // MAXIMUM POWER (capped at 1.0)
+                            emotionalSpeed = 3f + intensity * 2f; // FAST
+                            emotionalRange = converging ? 15f : 90f; // Converge tight, then BLAST wide
+                            emotionalColor = Color.white; // Pure bright white
+                            
+                            // Strobe on every beat
+                            if (analysisData.IsBeatAt(t, 0.1f))
+                            {
+                                emotionalIntensity = 1f;
+                            }
+                            break;
+                            
+                        case StoryMoment.Resolution:
+                            // "Release... the beams slow, spreading gently like a breath out"
+                            float resolutionCalm = Mathf.Min(1f, timeSinceBeatStart / 6f);
+                            emotionalIntensity = Mathf.Lerp(0.8f, 0.3f, Mathf.SmoothStep(0, 1, resolutionCalm));
+                            emotionalSpeed = Mathf.Lerp(2f, 0.4f, resolutionCalm); // Gradually slowing
+                            emotionalRange = Mathf.Lerp(60f, 40f, resolutionCalm); // Settling into gentle sway
+                            emotionalColor = Color.Lerp(Color.yellow, new Color(0.6f, 0.8f, 1f), resolutionCalm); // Warm to cool
+                            break;
+                            
+                        case StoryMoment.Finale:
+                            // "Farewell... one last graceful sweep before the lights fade"
+                            float exitProgress = timeSinceBeatStart / 5f;
+                            emotionalIntensity = Mathf.Lerp(0.3f, 0.01f, Mathf.SmoothStep(0, 1, exitProgress));
+                            emotionalSpeed = 0.5f - exitProgress * 0.3f; // Slowing to stillness
+                            emotionalRange = 50f + Mathf.Sin(t * 0.5f) * 20f; // One final graceful arc
+                            emotionalColor = Color.Lerp(new Color(0.6f, 0.8f, 1f), Color.white * 0.1f, exitProgress); // Fade to dim
+                            break;
                     }
                     
-                    // Sweep motion
-                    float sweepAngle = Mathf.Sin(t * sweepSpeed) * 60f;
-                    Quaternion rotation = initialRot * Quaternion.Euler(sweepAngle, t * 30f, 0);
+                    // Apply personality to movement
+                    emotionalSpeed *= 1f + laserPersonality * 0.5f;
+                    
+                    // Flickering in conflict/panic
+                    if (flickering && random.NextDouble() < 0.3)
+                    {
+                        emotionalIntensity *= 0.3f; // Random dropout
+                    }
+                    
+                    // Clamp intensity to range [0.01, 1.0]
+                    emotionalIntensity = Mathf.Clamp(emotionalIntensity, 0.01f, 1f);
+                    
+                    // Set intensity
+                    intensityCurve.AddKey(t, emotionalIntensity);
+                    
+                    // Set color
+                    colorR.AddKey(t, emotionalColor.r);
+                    colorG.AddKey(t, emotionalColor.g);
+                    colorB.AddKey(t, emotionalColor.b);
+                    
+                    // Sweep motion - emotional arc through space
+                    float sweepPattern = Mathf.Sin(t * baseSweepSpeed * emotionalSpeed) * emotionalRange;
+                    float yawDrift = t * (20f * emotionalSpeed);
+                    
+                    // Add tremor during intense moments
+                    float tremor = 0f;
+                    if (beat.moment == StoryMoment.Conflict || beat.moment == StoryMoment.Climax)
+                    {
+                        tremor = Mathf.Sin(t * 15f + i * 2f) * 5f;
+                    }
+                    
+                    Quaternion rotation = initialRot * Quaternion.Euler(
+                        sweepPattern + tremor,
+                        yawDrift,
+                        Mathf.Sin(t * emotionalSpeed * 0.3f) * 10f // Subtle roll
+                    );
+                    
                     rotX.AddKey(t, rotation.x);
                     rotY.AddKey(t, rotation.y);
                     rotZ.AddKey(t, rotation.z);
                     rotW.AddKey(t, rotation.w);
+                    
+                    previousBeat = beat;
                 }
                 
                 clip.SetCurve("", typeof(Light), "m_Intensity", intensityCurve);
+                clip.SetCurve("", typeof(Light), "m_Color.r", colorR);
+                clip.SetCurve("", typeof(Light), "m_Color.g", colorG);
+                clip.SetCurve("", typeof(Light), "m_Color.b", colorB);
                 clip.SetCurve("", typeof(Transform), "localRotation.x", rotX);
                 clip.SetCurve("", typeof(Transform), "localRotation.y", rotY);
                 clip.SetCurve("", typeof(Transform), "localRotation.z", rotZ);

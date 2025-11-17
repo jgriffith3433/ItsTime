@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fcb-5800-7882-a89a-4b351bd750bd.pose.json",
+    "prompt": "hands on knees and shake",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1857240774,
+    "w3CTraceId": "3da68b232de6493803588175fb924c8b",
+    "isTrimmed": false
+}

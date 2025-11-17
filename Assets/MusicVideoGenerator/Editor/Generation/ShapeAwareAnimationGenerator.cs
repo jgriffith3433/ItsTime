@@ -729,145 +729,236 @@ namespace MusicVideoGenerator
             MusicVideoSettings settings,
             System.Random random)
         {
-            // Story-driven animation for supporting cast - they react to narrative moments
+            // EMOTIONALLY-DRIVEN CHOREOGRAPHY - Background cast tells the story through movement
             float timeStep = settings.keyframeInterval;
             
-            // Base orbit radius - varies by role to create depth
-            float baseOrbitRadius;
-            float orbitSpeedMultiplier;
-            float scaleMultiplier;
+            // Character assignment - each object has a role in the story
+            float baseOrbitRadius = Mathf.Max(settings.stageBounds.x, settings.stageBounds.z);
+            float characterDepth; // How far from center (0=center, 1=edge)
+            float emotionalReactivity; // How strongly they react to story
+            float scaleBase;
             
-            if (castMember.role == CastRole.BackgroundSupport)
+            switch (castMember.role)
             {
-                baseOrbitRadius = Mathf.Max(settings.stageBounds.x, settings.stageBounds.z) * 0.85f;
-                orbitSpeedMultiplier = 0.8f; // Slower, more distant
-                scaleMultiplier = 0.6f; // Smaller
-            }
-            else if (castMember.role == CastRole.Spotlight)
-            {
-                baseOrbitRadius = Mathf.Max(settings.stageBounds.x, settings.stageBounds.z) * 0.95f;
-                orbitSpeedMultiplier = 0.6f; // Very slow, frame the scene
-                scaleMultiplier = 0.7f;
-            }
-            else if (castMember.role == CastRole.FeaturedSupport)
-            {
-                baseOrbitRadius = Mathf.Max(settings.stageBounds.x, settings.stageBounds.z) * 0.75f;
-                orbitSpeedMultiplier = 1.2f; // More active
-                scaleMultiplier = 0.8f;
-            }
-            else // Ambient
-            {
-                baseOrbitRadius = Mathf.Max(settings.stageBounds.x, settings.stageBounds.z) * 0.9f;
-                orbitSpeedMultiplier = 1.0f;
-                scaleMultiplier = 0.5f; // Smallest, most distant
+                case CastRole.BackgroundSupport:
+                    characterDepth = 0.85f; // Distant observers
+                    emotionalReactivity = 0.6f; // Subtle reactions
+                    scaleBase = 0.5f;
+                    break;
+                case CastRole.Spotlight:
+                    characterDepth = 0.95f; // Frame the story
+                    emotionalReactivity = 0.4f; // Steady presence
+                    scaleBase = 0.7f;
+                    break;
+                case CastRole.FeaturedSupport:
+                    characterDepth = 0.7f; // Part of the chorus
+                    emotionalReactivity = 1.2f; // Highly responsive
+                    scaleBase = 0.8f;
+                    break;
+                default: // Ambient
+                    characterDepth = 0.9f; // Atmosphere
+                    emotionalReactivity = 0.8f;
+                    scaleBase = 0.4f;
+                    break;
             }
             
-            // Stagger entry timing based on cast index - creates waves/sequences
-            float angleOffset = castIndex * 0.8f;
-            float timeOffset = (castIndex % 5) * 0.3f; // Groups of 5 move in sync
+            // Assign each object to a formation group (creates synchronized patterns)
+            int groupSize = 8;
+            int groupId = castIndex / groupSize;
+            int positionInGroup = castIndex % groupSize;
+            float groupPhase = groupId * 1.3f; // Each group slightly offset
+            
+            StoryBeat previousBeat = storyBeats[0];
             
             for (float t = 0; t <= analysisData.maxTime; t += timeStep)
             {
                 var section = GetSectionAtTime(musicSections, t);
                 var beat = GetBeatAtTime(storyBeats, t);
-                float intensity = section.intensity > 0 ? section.intensity : 0.5f;
                 
-                // STORY-DRIVEN BEHAVIOR - React to narrative moments
-                float storyRadiusMult = 1f;
-                float storySpeedMult = 1f;
-                float storyScaleMult = 1f;
-                float storyRotationSpeed = 0.1f;
+                // Track beat transitions for dramatic moments
+                bool momentChanged = beat.moment != previousBeat.moment;
+                float timeSinceBeatStart = t - beat.time;
+                float beatProgress = Mathf.Clamp01(timeSinceBeatStart / 4f);
+                
+                float intensity = section.intensity > 0 ? section.intensity : 0.5f;
+                float energy = section.energy > 0 ? section.energy : 0.5f;
+                
+                // EMOTIONAL STATE - drives the entire performance
+                Vector3 emotionalTarget = Vector3.zero;
+                float emotionalDistance = 1f;
+                float emotionalTension = 0f;
+                float emotionalScale = 1f;
+                float emotionalRotation = 1f;
+                Color emotionalColor = Color.white; // Could be used for emission
                 
                 switch (beat.moment)
                 {
                     case StoryMoment.Introduction:
-                        // Objects slowly emerge, gathering around
-                        storyRadiusMult = Mathf.Lerp(1.5f, 1f, Mathf.Min(1f, (t - beat.time) / 5f));
-                        storyScaleMult = Mathf.Lerp(0.2f, 1f, Mathf.Min(1f, (t - beat.time) / 4f));
-                        storyRotationSpeed = 0.05f; // Very slow, calm
+                        // "We are gathering... something is about to begin"
+                        // Objects emerge from darkness, slowly revealing themselves
+                        float introProgress = Mathf.Min(1f, timeSinceBeatStart / 8f);
+                        emotionalDistance = Mathf.Lerp(2f, 1f, Mathf.SmoothStep(0, 1, introProgress));
+                        emotionalScale = Mathf.Lerp(0.1f, 1f, Mathf.SmoothStep(0, 1, introProgress));
+                        emotionalRotation = 0.3f; // Gentle, curious rotation
+                        emotionalTension = 0.1f;
+                        
+                        // Formation: Scattered, gradually forming rings
+                        float scatterAmount = 1f - introProgress;
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(groupPhase + positionInGroup * 0.785f) * scatterAmount * 0.5f,
+                            0,
+                            Mathf.Cos(groupPhase + positionInGroup * 0.785f) * scatterAmount * 0.5f
+                        );
                         break;
                         
                     case StoryMoment.Rising:
-                        // Energy builds - tighten formation, speed up
-                        storyRadiusMult = 1f - intensity * 0.2f; // Pull closer
-                        storySpeedMult = 1f + intensity * 0.5f;
-                        storyRotationSpeed = 0.2f * intensity;
+                        // "Tension builds... we draw closer together"
+                        // Objects contract inward, circling, building anticipation
+                        emotionalDistance = 0.9f - energy * 0.3f; // Pull closer as energy builds
+                        emotionalTension = energy * 0.6f;
+                        emotionalRotation = 1f + energy * 2f; // Speed increases
+                        emotionalScale = 1f + Mathf.Sin(t * 2f) * energy * 0.2f; // Nervous pulsing
+                        
+                        // Formation: Tight spiral inward
+                        float spiralTightness = energy;
+                        float spiralAngle = t * (1f + energy) + positionInGroup * 0.5f;
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(spiralAngle) * (1f - spiralTightness * 0.4f),
+                            Mathf.Sin(t * 1.5f) * spiralTightness * 0.3f,
+                            Mathf.Cos(spiralAngle) * (1f - spiralTightness * 0.4f)
+                        );
                         break;
                         
                     case StoryMoment.Conflict:
-                        // Chaotic movement - erratic orbits
-                        storyRadiusMult = 1f + Mathf.Sin(t * 2f + castIndex) * 0.3f; // Pulsing in/out
-                        storySpeedMult = 1.5f + Mathf.Sin(t * 3f + angleOffset) * 0.5f;
-                        storyRotationSpeed = 0.5f + Mathf.Sin(t * 1.5f) * 0.3f; // Variable speed
-                        storyScaleMult = 1f + Mathf.Sin(t * 4f + castIndex * 0.5f) * 0.2f;
+                        // "CHAOS! Everything breaks apart!"
+                        // Violent, erratic movement - objects fight against each other
+                        float chaosPhase = t * 3f + castIndex * 0.3f;
+                        emotionalDistance = 1.2f + Mathf.Sin(chaosPhase) * 0.5f; // Pulsing in/out violently
+                        emotionalTension = 1f; // Maximum stress
+                        emotionalRotation = 3f + Mathf.Sin(t * 2f) * 2f; // Chaotic spinning
+                        emotionalScale = 1f + Mathf.Sin(chaosPhase * 2f) * 0.4f; // Erratic scaling
+                        
+                        // Formation: BROKEN - each object moves independently
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(chaosPhase * 1.3f + positionInGroup) * 0.6f,
+                            Mathf.Sin(chaosPhase * 2.1f) * 0.8f,
+                            Mathf.Cos(chaosPhase * 1.7f - positionInGroup) * 0.6f
+                        );
                         break;
                         
                     case StoryMoment.Climax:
-                        // EXPLOSIVE - push to extremes
-                        storyRadiusMult = 1.3f + intensity * 0.5f; // Blast outward
-                        storySpeedMult = 2f + intensity;
-                        storyRotationSpeed = 1f + intensity;
-                        storyScaleMult = 1.5f + intensity * 0.5f; // GROW
+                        // "THE PEAK! EVERYTHING EXPLODES OUTWARD!"
+                        // Massive expansion, objects thrown to the edges
+                        float climaxForce = intensity * 2f;
+                        emotionalDistance = 1.5f + climaxForce * 0.8f; // BLAST OUTWARD
+                        emotionalTension = 2f; // Beyond maximum
+                        emotionalRotation = 5f + intensity * 3f; // SPINNING WILDLY
+                        emotionalScale = 1.8f + intensity * 0.7f; // HUGE
+                        
+                        // Formation: Explosive radial burst
+                        float burstAngle = positionInGroup * 0.785f + groupPhase;
+                        float burstPower = 1f + intensity;
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(burstAngle) * burstPower,
+                            Mathf.Sin(t * 3f + positionInGroup * 0.5f) * climaxForce * 0.4f,
+                            Mathf.Cos(burstAngle) * burstPower
+                        );
+                        
+                        // Pulse on beats during climax
+                        if (analysisData.IsBeatAt(t, 0.1f))
+                        {
+                            emotionalScale *= 1.5f;
+                            emotionalDistance *= 1.3f;
+                        }
                         break;
                         
                     case StoryMoment.Resolution:
-                        // Calming - slow return to order
-                        float resolutionProgress = Mathf.Min(1f, (t - beat.time) / 6f);
-                        storyRadiusMult = Mathf.Lerp(1.3f, 1f, resolutionProgress);
-                        storySpeedMult = Mathf.Lerp(1.5f, 0.8f, resolutionProgress);
-                        storyRotationSpeed = Mathf.Lerp(0.5f, 0.1f, resolutionProgress);
-                        storyScaleMult = Mathf.Lerp(1.2f, 1f, resolutionProgress);
+                        // "Exhale... we slowly return to peace"
+                        // Calming, flowing back into order
+                        float resolutionCalm = Mathf.Min(1f, timeSinceBeatStart / 6f);
+                        emotionalDistance = Mathf.Lerp(1.5f, 1f, Mathf.SmoothStep(0, 1, resolutionCalm));
+                        emotionalTension = Mathf.Lerp(1f, 0.2f, resolutionCalm);
+                        emotionalRotation = Mathf.Lerp(2f, 0.5f, resolutionCalm);
+                        emotionalScale = Mathf.Lerp(1.5f, 1f, Mathf.SmoothStep(0, 1, resolutionCalm));
+                        
+                        // Formation: Gently swaying in rings
+                        float swayAmount = 0.2f * (1f - resolutionCalm);
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(t * 0.3f + positionInGroup * 0.785f) * swayAmount,
+                            Mathf.Sin(t * 0.4f) * 0.3f,
+                            Mathf.Cos(t * 0.3f + positionInGroup * 0.785f) * swayAmount
+                        );
                         break;
                         
                     case StoryMoment.Finale:
-                        // Grand exit - sweep in formation
-                        float finaleProgress = (t - beat.time) / 4f;
-                        storyRadiusMult = 1f + finaleProgress * 0.8f; // Sweep outward
-                        storySpeedMult = 1.2f + finaleProgress * 0.8f;
-                        storyRotationSpeed = 0.3f + finaleProgress * 0.5f;
-                        storyScaleMult = Mathf.Lerp(1f, 0.3f, finaleProgress); // Fade out
+                        // "Goodbye... we fade into the distance"
+                        // Grand sweeping exit, objects drift away gracefully
+                        float exitProgress = timeSinceBeatStart / 6f;
+                        emotionalDistance = 1f + exitProgress * 1.5f; // Drift away
+                        emotionalScale = Mathf.Lerp(1f, 0.2f, Mathf.SmoothStep(0, 1, exitProgress)); // Shrink
+                        emotionalRotation = 0.8f - exitProgress * 0.5f; // Slow down
+                        emotionalTension = 0f;
+                        
+                        // Formation: Spiral outward and fade
+                        float exitAngle = t * 0.4f + positionInGroup * 0.785f;
+                        float exitRadius = 1f + exitProgress * 2f;
+                        emotionalTarget = new Vector3(
+                            Mathf.Sin(exitAngle) * exitRadius,
+                            Mathf.Lerp(0f, -5f, exitProgress), // Descend
+                            Mathf.Cos(exitAngle) * exitRadius
+                        );
                         break;
                 }
                 
-                // Apply story modifiers to movement
-                float currentOrbitRadius = baseOrbitRadius * storyRadiusMult;
-                float orbitSpeed = 0.15f * orbitSpeedMultiplier * storySpeedMult;
+                // Apply emotional reactivity based on character role
+                emotionalDistance = Mathf.Lerp(1f, emotionalDistance, emotionalReactivity);
+                emotionalScale = Mathf.Lerp(1f, emotionalScale, emotionalReactivity);
+                emotionalTension = emotionalTension * emotionalReactivity;
                 
-                // Beat reactions - pulse on musical beats
-                float beatPulse = analysisData.IsBeatAt(t, 0.12f) ? intensity * 0.15f : 0f;
+                // POSITION - Combine formation target with emotional distance
+                float currentRadius = baseOrbitRadius * characterDepth * emotionalDistance;
+                float orbitAngle = t * emotionalRotation * 0.2f + castIndex * 0.6f + groupPhase;
                 
-                // Calculate orbital position with story influence
                 Vector3 pos = settings.stageCenter;
-                float angle = (t + timeOffset) * orbitSpeed + angleOffset;
-                pos.x += Mathf.Cos(angle) * currentOrbitRadius * (1f + beatPulse);
-                pos.z += Mathf.Sin(angle) * currentOrbitRadius * (1f + beatPulse);
+                pos += emotionalTarget * baseOrbitRadius * 0.3f; // Formation offset
+                pos.x += Mathf.Cos(orbitAngle) * currentRadius;
+                pos.z += Mathf.Sin(orbitAngle) * currentRadius;
                 
-                // Vertical movement - story-driven
-                float verticalRange = 3f * storyScaleMult;
-                pos.y += Mathf.Sin(t * 0.2f + timeOffset) * verticalRange;
+                // Musical beat reactions - quick pulses
+                if (analysisData.IsBeatAt(t, 0.1f))
+                {
+                    float beatReaction = intensity * emotionalReactivity * 0.15f;
+                    pos += new Vector3(
+                        Mathf.Sin(orbitAngle) * baseOrbitRadius * beatReaction,
+                        baseOrbitRadius * beatReaction * 0.5f,
+                        Mathf.Cos(orbitAngle) * baseOrbitRadius * beatReaction
+                    );
+                }
                 
                 if (settings.constrainMovement)
                 {
                     pos = ClampToBounds(pos, settings.stageCenter, settings.movementBounds);
                 }
                 
-                // Story-driven rotation
+                // ROTATION - Emotional tension affects spin
+                float rotSpeed = emotionalRotation * (30f + emotionalTension * 50f);
                 Quaternion rotation = initialTransform.rotation * Quaternion.Euler(
-                    t * storyRotationSpeed * 30f,
-                    t * storyRotationSpeed * 50f,
-                    t * storyRotationSpeed * 20f
+                    t * rotSpeed * 0.7f + Mathf.Sin(t * emotionalTension * 2f) * 30f * emotionalTension,
+                    t * rotSpeed,
+                    t * rotSpeed * 0.4f + Mathf.Cos(t * emotionalTension * 1.5f) * 20f * emotionalTension
                 );
                 
-                // Story-driven scale with beat pulses
-                Vector3 scale = initialTransform.scale * scaleMultiplier * storyScaleMult;
-                if (analysisData.IsBeatAt(t, 0.12f))
-                {
-                    scale *= 1f + intensity * 0.15f; // Pulse on beats
-                }
+                // SCALE - Size reflects emotional intensity
+                Vector3 scale = initialTransform.scale * scaleBase * emotionalScale;
+                
+                // Breathing - constant subtle pulse
+                scale *= 1f + Mathf.Sin(t * 1.5f + castIndex * 0.3f) * 0.08f;
                 
                 AddRotationKeyframes(clip, "", rotation, t);
                 AddPositionKeyframes(clip, "", pos, t);
                 AddScaleKeyframes(clip, "", scale, t);
+                
+                previousBeat = beat;
             }
             
             FinalizeAllCurves(clip);

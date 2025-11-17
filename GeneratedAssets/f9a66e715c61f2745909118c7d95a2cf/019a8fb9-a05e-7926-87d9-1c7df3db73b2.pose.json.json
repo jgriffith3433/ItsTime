@@ -1,0 +1,11 @@
+{
+    "asset": "f9a66e715c61f2745909118c7d95a2cf",
+    "fileName": "019a8fb9-a05e-7926-87d9-1c7df3db73b2.pose.json",
+    "prompt": "jumping up",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 780966561,
+    "w3CTraceId": "8e105b3704c87a506b8f72f45717b07b",
+    "isTrimmed": false
+}

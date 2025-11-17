@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fcb-07f7-799a-9ae7-411c321a8ff6.pose.json",
+    "prompt": "head bang over and over",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1015474691,
+    "w3CTraceId": "71f54f3e5078cc6d3f36fc15d0553e2f",
+    "isTrimmed": false
+}

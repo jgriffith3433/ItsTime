@@ -1,0 +1,11 @@
+{
+    "asset": "f9a66e715c61f2745909118c7d95a2cf",
+    "fileName": "019a8fb9-e9b0-75a1-82d2-293927850bca.pose.json",
+    "prompt": "jumping and spinning over and over",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 145432960,
+    "w3CTraceId": "e1e43dae387bd8be34246a0d83cca5ed",
+    "isTrimmed": false
+}

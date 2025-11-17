@@ -9,6 +9,7 @@ namespace MobileControllerFramework
     public class FPSController : MonoBehaviour
     {
         [SerializeField] private PlayableDirector playableDirector;
+        public PlayableDirector introTimeline;
 
         [Header("Controller Settings")]
         [Tooltip("Enable or disable character movement and input processing")]
@@ -23,6 +24,7 @@ namespace MobileControllerFramework
 
         [Header("References")]
         public Analog analog;
+        public MobileControllerFramework.Button punchButton;
         public Swap swap;
         public GameObject type_1;
         public GameObject type_2;
@@ -51,6 +53,11 @@ namespace MobileControllerFramework
 
             if (cameraTransform == null)
                 Debug.LogError("FPSController: No Main Camera found in the scene.");
+
+            if (!Application.isMobilePlatform)
+            {
+                analog.gameObject.SetActive(false);
+            }
         }
 
         #endregion
@@ -66,12 +73,20 @@ namespace MobileControllerFramework
                 moveVelocity = Vector3.zero;
             }
             wasControlsEnabled = controlsEnabled;
-            
-            HandleMovement();
+
+            // if mobile
+            if (Application.isMobilePlatform)
+            {
+                HandleMobileMovement();
+            }
+            else
+            {
+                HandlePCMovement();
+            }
         }
 
 
-        private void HandleMovement()
+        private void HandleMobileMovement()
         {
             if (!controlsEnabled || analog == null || cameraTransform == null) return;
 
@@ -92,6 +107,38 @@ namespace MobileControllerFramework
             
             // If no input, apply deceleration to stop faster
             float lerpSpeed = input.magnitude > 0.1f ? smoothMovement : deceleration;
+            moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, lerpSpeed);
+            moveVelocity.z = Mathf.Lerp(moveVelocity.z, targetVelocity.z, lerpSpeed);
+
+            // Apply gravity
+            if (characterController.isGrounded && moveVelocity.y < 0) moveVelocity.y = -1f;
+            moveVelocity.y += Physics.gravity.y * Time.deltaTime;
+
+            characterController.Move(moveVelocity * Time.deltaTime);
+        }
+
+        private void HandlePCMovement()
+        {
+            if (!controlsEnabled || cameraTransform == null) return;
+
+            float inputX = Input.GetAxis("Horizontal");
+            float inputZ = Input.GetAxis("Vertical");
+            Vector3 inputDir = cameraTransform.forward * inputZ + cameraTransform.right * inputX;
+            inputDir.y = 0; // prevent vertical movement from camera tilt
+            inputDir.Normalize();
+
+            // Rotate character to face movement direction
+            if (inputDir.magnitude > 0.1f) // Only rotate if there's significant input
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(inputDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+
+            // Apply movement
+            Vector3 targetVelocity = inputDir * moveSpeed;
+
+            // If no input, apply deceleration to stop faster
+            float lerpSpeed = (Mathf.Abs(inputX) > 0.1f || Mathf.Abs(inputZ) > 0.1f) ? smoothMovement : deceleration;
             moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, lerpSpeed);
             moveVelocity.z = Mathf.Lerp(moveVelocity.z, targetVelocity.z, lerpSpeed);
 
@@ -170,14 +217,19 @@ namespace MobileControllerFramework
 
         private IEnumerator PunchWhiteboard()
         {
+            if (introTimeline != null && introTimeline.state == PlayState.Playing)
+            {
+                introTimeline.Stop();
+            }
+            playableDirector.Play();
             whiteboardTrigger.gameObject.SetActive(false); // disable trigger to avoid multiple punches
             yield return new WaitForSeconds(0.15f);
+            punchButton.gameObject.SetActive(false);
             whiteboardRigidbody.isKinematic = false; // ensure physics is enabled
             Vector3 forceDir = whiteboardRigidbody.transform.up + Vector3.up * 0.1f;
             forceDir.Normalize();
             whiteboardRigidbody.AddForce(forceDir * 8f, ForceMode.Impulse);
             yield return new WaitForSeconds(1f);
-            playableDirector.Play();
             whiteboardCollider.enabled = false;
             whiteboardRigidbody.isKinematic = true; // ensure physics is enabled
         }

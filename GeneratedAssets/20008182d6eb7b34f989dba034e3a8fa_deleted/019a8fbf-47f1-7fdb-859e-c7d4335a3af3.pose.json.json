@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fbf-47f1-7fdb-859e-c7d4335a3af3.pose.json",
+    "prompt": "trip and fall",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1240201546,
+    "w3CTraceId": "e89ce04e24a6ddfe682bab7e6c283706",
+    "isTrimmed": false
+}

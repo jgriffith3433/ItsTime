@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fc9-cc84-71b4-82e6-7ea242f12a01.pose.json",
+    "prompt": "shaking butt",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 571422522,
+    "w3CTraceId": "0b510cd4c6c1b078975604d1ffcd95d4",
+    "isTrimmed": false
+}

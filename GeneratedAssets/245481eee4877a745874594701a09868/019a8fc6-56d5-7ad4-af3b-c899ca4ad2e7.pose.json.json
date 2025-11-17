@@ -1,0 +1,11 @@
+{
+    "asset": "d0d9e02abdb36334480969670c3f6005",
+    "fileName": "019a8fc6-56d5-7ad4-af3b-c899ca4ad2e7.pose.json",
+    "prompt": "jumping like crazy",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 253724709,
+    "w3CTraceId": "679fcf2014816d0f58984af8b7eae762",
+    "isTrimmed": false
+}
