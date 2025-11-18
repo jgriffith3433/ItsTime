@@ -1,0 +1,11 @@
+{
+    "asset": "2a0ba3b010fd1d244bbaf5cb12a29f4b",
+    "fileName": "019a951b-73cf-74c9-a4ad-6b547e33c57d.pose.json",
+    "prompt": "holds a flashlight to his chin",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 170164563,
+    "w3CTraceId": "d649207f2f31c6a599ebeeba3d660e4a",
+    "isTrimmed": false
+}

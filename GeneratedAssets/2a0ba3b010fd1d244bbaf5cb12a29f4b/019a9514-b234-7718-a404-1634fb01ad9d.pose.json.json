@@ -1,0 +1,11 @@
+{
+    "asset": "2a0ba3b010fd1d244bbaf5cb12a29f4b",
+    "fileName": "019a9514-b234-7718-a404-1634fb01ad9d.pose.json",
+    "prompt": "hands on hips",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 574630189,
+    "w3CTraceId": "445bb92dbbc25025dd05a465a88d52a2",
+    "isTrimmed": false
+}

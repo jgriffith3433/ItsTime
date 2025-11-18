@@ -1,0 +1,11 @@
+{
+    "asset": "2a0ba3b010fd1d244bbaf5cb12a29f4b",
+    "fileName": "019a9508-e800-7208-87b7-eca0c356b26c.pose.json",
+    "prompt": "writing on whiteboard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1332271688,
+    "w3CTraceId": "a5fb2dec1abb875371f7311579a29757",
+    "isTrimmed": false
+}

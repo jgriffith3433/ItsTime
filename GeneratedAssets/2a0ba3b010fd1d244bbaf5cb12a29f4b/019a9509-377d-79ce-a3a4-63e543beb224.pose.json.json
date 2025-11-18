@@ -1,0 +1,11 @@
+{
+    "asset": "2a0ba3b010fd1d244bbaf5cb12a29f4b",
+    "fileName": "019a9509-377d-79ce-a3a4-63e543beb224.pose.json",
+    "prompt": "writing on chalkboard",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 109147590,
+    "w3CTraceId": "185a1622da6420cc98f9540a93ba4d5d",
+    "isTrimmed": false
+}
