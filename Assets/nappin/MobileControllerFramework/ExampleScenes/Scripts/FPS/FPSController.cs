@@ -15,15 +15,31 @@ namespace MobileControllerFramework
         [Tooltip("Enable or disable character movement and input processing")]
         public bool controlsEnabled = true;
         [Min(0)] public float moveSpeed = 8f;
+        [Min(0)] private float constantForwardSpeed = 0.15f; // Constant forward movement speed
         [Min(0)] public float smoothMovement = 0.025f;
         [Range(0, 1)] public float deceleration = 0.9f; // Higher = stops faster (0 = slides forever, 1 = instant stop)
-        [Min(0)] public float rotationSpeed = 10f; // Speed at which character rotates to face movement direction
+        [Min(0)] public float rotationSpeed = 5f; // Speed at which character rotates to face movement direction
         public float normalHeight = 2f;
         public float crouchHeight = 1f;
         public float throwForce = 10f;
 
+        [Header("Character Mesh")]
+        [Tooltip("The character mesh transform to rotate for aiming")]
+        [SerializeField] private Transform characterMesh;
+        [Tooltip("Speed at which character mesh rotates to simulate aiming")]
+        [Min(0)] public float meshRotationSpeed = 5f;
+
+        [Header("Raycast Target")]
+        [Tooltip("GameObject to position at raycast hit point")]
+        [SerializeField] private GameObject bulletHits;
+        [Tooltip("Perform raycast every N frames (1 = every frame, 2 = every other frame, etc.)")]
+        [Min(1)] private int raycastFrameInterval = 15;
+        [Tooltip("Maximum raycast distance")]
+        [Min(1)] private float raycastMaxDistance = 25f;
+
         [Header("References")]
         public Analog analog;
+        public Analog fireAnalog;
         public MobileControllerFramework.Button punchButton;
         public Swap swap;
         public GameObject type_1;
@@ -31,6 +47,9 @@ namespace MobileControllerFramework
         public GameObject type_3;
         public Animator gunAnim;
         public Animator characterAnim;
+        public GameObject muzzleFire;
+        public GameObject bulletShells;
+        public AudioSource gunAudio;
 
         public Rigidbody whiteboardRigidbody;
         public Collider whiteboardCollider;
@@ -43,6 +62,9 @@ namespace MobileControllerFramework
         private bool isPunching = false;
         private bool punchedWhiteboard = false;
         private bool wasControlsEnabled = true;
+        private bool isFiring = false;
+        private int frameCounter = 0;
+        private int raycastLayerMask;
 
         #region Setup
 
@@ -54,10 +76,19 @@ namespace MobileControllerFramework
             if (cameraTransform == null)
                 Debug.LogError("FPSController: No Main Camera found in the scene.");
 
-            if (!Application.isMobilePlatform)
+            if (Application.isMobilePlatform)
+            {
+                analog.gameObject.SetActive(true);
+                fireAnalog.gameObject.SetActive(true);
+            }
+            else
             {
                 analog.gameObject.SetActive(false);
+                fireAnalog.gameObject.SetActive(false);
             }
+
+            // Create layer mask that ignores Player layer
+            raycastLayerMask = ~LayerMask.GetMask("Player");
         }
 
         #endregion
@@ -83,14 +114,140 @@ namespace MobileControllerFramework
             {
                 HandlePCMovement();
             }
+            
+            if (gunAnim != null)
+            {
+                gunAnim.SetBool("Fire", isFiring);
+            }
+
+            if (muzzleFire != null)
+            {
+                muzzleFire.SetActive(isFiring);
+            }
+            if (bulletShells != null)
+            {
+                bulletShells.SetActive(isFiring);
+            }
+            if (bulletHits != null)
+            {
+                bulletHits.SetActive(isFiring);
+            }
+            if (gunAudio != null)
+            {
+                if (isFiring)
+                {
+                    if (!gunAudio.isPlaying)
+                    {
+                        gunAudio.Play();
+                    }
+                }
+                else
+                {
+                    if (gunAudio.isPlaying)
+                    {
+                        gunAudio.Stop();
+                    }
+                }
+            }
+        }
+
+        private void LateUpdate()
+        {
+            RotateCharacterMeshTowardsCameraAim();
+            if (isFiring)
+            {
+                UpdateBulletHits();
+            }
+        }
+
+        private void UpdateBulletHits()
+        {
+            if (bulletHits == null || cameraTransform == null) return;
+
+            // Only perform raycast every N frames
+            frameCounter++;
+            if (frameCounter >= raycastFrameInterval)
+            {
+                frameCounter = 0;
+
+                Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, raycastMaxDistance, raycastLayerMask))
+                {
+                    // Position target at hit point
+                    bulletHits.transform.position = hit.point;
+                    
+                    // Rotate target to look at camera
+                    Vector3 directionToCamera = cameraTransform.position - hit.point;
+                    if (directionToCamera.magnitude > 0.01f)
+                    {
+                        bulletHits.transform.rotation = Quaternion.LookRotation(directionToCamera);
+                    }
+
+                    // Check if hit object has "Bug" tag
+                    if (hit.collider.CompareTag("Bug"))
+                    {
+                        Bug bug = hit.collider.GetComponent<Bug>();
+                        if (bug != null)
+                        {
+                            bug.Explode();
+                        }
+                    }
+                }
+                else
+                {
+                    // If no hit, position at max distance
+                    bulletHits.transform.position = cameraTransform.position + cameraTransform.forward * raycastMaxDistance;
+                    bulletHits.transform.rotation = Quaternion.LookRotation(cameraTransform.position - bulletHits.transform.position);
+                }
+            }
+        }
+
+        private void RotateCharacterMeshTowardsCameraAim()
+        {
+            if (characterMesh == null || cameraTransform == null) return;
+
+            // Get the camera's look direction
+            Vector3 cameraForward = cameraTransform.forward;
+            
+            // Clamp vertical rotation - only allow upward rotation (positive Y), not downward
+            if (cameraForward.y < 0)
+            {
+                cameraForward.y = 0;
+            }
+            
+            if (cameraForward.magnitude > 0.01f)
+            {
+                cameraForward.Normalize();
+                
+                // Calculate target rotation for the character mesh
+                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+                
+                // Smoothly rotate the character mesh
+                characterMesh.rotation = Quaternion.Slerp(characterMesh.rotation, targetRotation, meshRotationSpeed * Time.deltaTime);
+            }
         }
 
 
         private void HandleMobileMovement()
         {
-            if (!controlsEnabled || analog == null || cameraTransform == null) return;
+            if (!controlsEnabled || analog == null || fireAnalog == null || cameraTransform == null) return;
 
             Vector2 input = analog.GetStickPosition();
+            
+            // Apply threshold of 0.8f to analog input
+            if (input.magnitude < 0.8f)
+            {
+                input = Vector2.zero;
+            }
+            
+            // Prevent backward movement (negative Y input)
+            if (input.y < 0)
+            {
+                input.y = 0;
+            }
+            
             Vector3 inputDir = cameraTransform.forward * input.y + cameraTransform.right * input.x;
             inputDir.y = 0; // prevent vertical movement from camera tilt
             inputDir.Normalize();
@@ -105,6 +262,10 @@ namespace MobileControllerFramework
             // Apply movement
             Vector3 targetVelocity = inputDir * moveSpeed;
             
+            // Add constant forward movement
+            Vector3 constantForward = transform.forward * constantForwardSpeed;
+            targetVelocity += constantForward;
+            
             // If no input, apply deceleration to stop faster
             float lerpSpeed = input.magnitude > 0.1f ? smoothMovement : deceleration;
             moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, lerpSpeed);
@@ -115,6 +276,16 @@ namespace MobileControllerFramework
             moveVelocity.y += Physics.gravity.y * Time.deltaTime;
 
             characterController.Move(moveVelocity * Time.deltaTime);
+
+            // Firing based on fireAnalog input
+            if (fireAnalog.IsDragging())
+            {
+                isFiring = true;
+            }
+            else
+            {
+                isFiring = false;
+            }
         }
 
         private void HandlePCMovement()
@@ -123,6 +294,13 @@ namespace MobileControllerFramework
 
             float inputX = Input.GetAxis("Horizontal");
             float inputZ = Input.GetAxis("Vertical");
+            
+            // Prevent backward movement (S key, negative vertical input)
+            if (inputZ < 0)
+            {
+                inputZ = 0;
+            }
+            
             Vector3 inputDir = cameraTransform.forward * inputZ + cameraTransform.right * inputX;
             inputDir.y = 0; // prevent vertical movement from camera tilt
             inputDir.Normalize();
@@ -137,6 +315,10 @@ namespace MobileControllerFramework
             // Apply movement
             Vector3 targetVelocity = inputDir * moveSpeed;
 
+            // Add constant forward movement
+            Vector3 constantForward = transform.forward * constantForwardSpeed;
+            targetVelocity += constantForward;
+
             // If no input, apply deceleration to stop faster
             float lerpSpeed = (Mathf.Abs(inputX) > 0.1f || Mathf.Abs(inputZ) > 0.1f) ? smoothMovement : deceleration;
             moveVelocity.x = Mathf.Lerp(moveVelocity.x, targetVelocity.x, lerpSpeed);
@@ -147,30 +329,23 @@ namespace MobileControllerFramework
             moveVelocity.y += Physics.gravity.y * Time.deltaTime;
 
             characterController.Move(moveVelocity * Time.deltaTime);
+
+
+            // firing is left click
+            if (Input.GetMouseButton(0))
+            {
+                isFiring = true;
+            }
+            else
+            {
+                isFiring = false;
+            }
         }
 
         #endregion
 
 
         #region Gun / Object Handling
-
-        public void GunSwap()
-        {
-            if (swap == null) return;
-
-            SwapContent currentItem = swap.GetCurrentItem();
-            if (currentItem == null) return;
-
-            type_1.SetActive((int)currentItem.contentType == 0);
-            type_2.SetActive((int)currentItem.contentType == 1);
-            type_3.SetActive((int)currentItem.contentType == 2);
-
-            if (gunAnim != null)
-            {
-                gunAnim.Play("Idle");
-                gunAnim.Play("Swap");
-            }
-        }
 
 
         public void ToggleHeight()
@@ -215,6 +390,16 @@ namespace MobileControllerFramework
             isPunching = false;
         }
 
+        public void StartFiring()
+        {
+            isFiring = true;
+        }
+
+        public void StopFiring()
+        {
+            isFiring = false;
+        }
+
         private IEnumerator PunchWhiteboard()
         {
             if (introTimeline != null && introTimeline.state == PlayState.Playing)
@@ -247,6 +432,34 @@ namespace MobileControllerFramework
             {
                 rb.AddForce(cameraTransform.forward * throwForce, ForceMode.Impulse);
             }
+        }
+
+        #endregion
+
+
+        #region Player Death
+
+        public void Die()
+        {
+            Debug.Log("Player has died!");
+            
+            // Disable controls
+            controlsEnabled = false;
+            
+            // Stop movement
+            moveVelocity = Vector3.zero;
+            
+            // Play death animation if available
+            if (characterAnim != null)
+            {
+                characterAnim.SetTrigger("Die");
+            }
+            
+            // You can add additional death logic here:
+            // - Respawn after delay
+            // - Show game over screen
+            // - Reload scene
+            // - etc.
         }
 
         #endregion

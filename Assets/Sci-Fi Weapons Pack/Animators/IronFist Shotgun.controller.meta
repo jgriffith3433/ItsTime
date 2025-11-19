@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21bc82379cac49742b09f0189d5ad23d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 76726
+  packageName: Sci-Fi Weapons
+  packageVersion: V1.1.2
+  assetPath: Assets/Sci-Fi Weapons Pack/Animators/IronFist Shotgun.controller
+  uploadId: 599538

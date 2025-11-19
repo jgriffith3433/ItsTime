@@ -1,0 +1,11 @@
+{
+    "asset": "5f53f45a65f29f545a602fe5038f01a2",
+    "fileName": "019a99f4-6e74-7a20-9e40-bc5f432e588a.pose.json",
+    "prompt": "FPS weapon",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2103862650,
+    "w3CTraceId": "133f19055ee71aa1b96053dd774b4880",
+    "isTrimmed": false
+}

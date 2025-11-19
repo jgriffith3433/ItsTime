@@ -9,7 +9,7 @@ namespace MobileControllerFramework
     * NOTE:
     * This component uses Unity's EventSystem (Pointer Events).
     * It works out of the box with both the Old Input Manager
-    * and the New Input System — no additional setup required.
+    * and the New Input System ï¿½ no additional setup required.
     */
 
 
@@ -62,6 +62,8 @@ namespace MobileControllerFramework
 
         private AnalogState analogState;
         private Animator anim;
+
+        public bool IsDragging() => isDragging;
 
 
         /**/

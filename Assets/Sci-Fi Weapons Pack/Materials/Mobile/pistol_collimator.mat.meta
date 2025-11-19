@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a2c45373f04b33d48b0df01a79a717da
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 76726
+  packageName: Sci-Fi Weapons
+  packageVersion: V1.1.2
+  assetPath: Assets/Sci-Fi Weapons Pack/Materials/Mobile/pistol_collimator.mat
+  uploadId: 599538

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cf2bb9f6e7cf3c14ca043ca584ced520
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 76726
+  packageName: Sci-Fi Weapons
+  packageVersion: V1.1.2
+  assetPath: Assets/Sci-Fi Weapons Pack/Animators/S4-VC6 Pistol.controller
+  uploadId: 599538

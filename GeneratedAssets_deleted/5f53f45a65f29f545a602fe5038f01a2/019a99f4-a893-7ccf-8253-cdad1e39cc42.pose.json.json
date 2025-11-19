@@ -1,0 +1,11 @@
+{
+    "asset": "5f53f45a65f29f545a602fe5038f01a2",
+    "fileName": "019a99f4-a893-7ccf-8253-cdad1e39cc42.pose.json",
+    "prompt": "Holding shotgun",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 2075001044,
+    "w3CTraceId": "988a32214746bb986182fb7c59b43f82",
+    "isTrimmed": false
+}

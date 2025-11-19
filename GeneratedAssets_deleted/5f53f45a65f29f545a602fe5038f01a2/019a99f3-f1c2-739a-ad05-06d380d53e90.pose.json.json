@@ -1,0 +1,11 @@
+{
+    "asset": "5f53f45a65f29f545a602fe5038f01a2",
+    "fileName": "019a99f3-f1c2-739a-ad05-06d380d53e90.pose.json",
+    "prompt": "holding weapon",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1716798738,
+    "w3CTraceId": "697882bde9161790f1dc540754516d61",
+    "isTrimmed": false
+}

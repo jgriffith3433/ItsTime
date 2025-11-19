@@ -1,0 +1,11 @@
+{
+    "asset": "5f53f45a65f29f545a602fe5038f01a2",
+    "fileName": "019a99f5-4455-710d-9805-2ced9fbe720f.pose.json",
+    "prompt": "holding heavy gun",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 877384422,
+    "w3CTraceId": "bbbe30cf35c232430828e950dcf14d32",
+    "isTrimmed": false
+}

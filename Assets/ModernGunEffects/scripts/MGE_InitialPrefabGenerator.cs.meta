@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3e623805acb72ad4db3144f7dfe94941
+timeCreated: 1513609620
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 6092
+  packageName: Modern Gun Effect Pack
+  packageVersion: 1.1
+  assetPath: Assets/ModernGunEffects/scripts/MGE_InitialPrefabGenerator.cs
+  uploadId: 219230

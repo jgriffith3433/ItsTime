@@ -7,91 +7,95 @@ namespace MobileControllerFramework
     [RequireComponent(typeof(Transform))]
     public class FPSCamera : MonoBehaviour
     {
-        [Header("Camera Behaviour")]
-        public float rotationSpeed = 5f;
-        public float smoothness = 10f;
         public float shakeIntensity = 0.1f;
         public float shakeDuration = 0.5f;
 
-        [Header("Mobile / Editor Multipliers")]
-        public Vector2 mobileMoveMultiplier = new Vector2(3f, 1.3f);
-        public Vector2 editorMoveMultiplier = Vector2.one;
+        [Header("Input")]
+        public Analog fireAnalog;
+        
+        [Header("Camera Settings")]
+        [Tooltip("Minimum range for horizontal camera movement (left)")]
+        public float xMinRange = -0.5f;
+        [Tooltip("Maximum range for horizontal camera movement (right)")]
+        public float xMaxRange = 0.5f;
+        [Tooltip("Minimum range for vertical camera movement (down)")]
+        public float yMinRange = -0.5f;
+        [Tooltip("Maximum range for vertical camera movement (up)")]
+        public float yMaxRange = 0.5f;
+        [Tooltip("Speed at which camera lerps to target position")]
+        [Range(0.01f, 1f)]
+        public float lerpSpeed = 0.1f;
+        [Tooltip("Deadzone threshold - input must exceed this to move camera")]
+        [Range(0f, 1f)]
+        private float deadzone = 0.1f;
 
-        [Header("References")]
-        public TouchDrag touchDrag;
-
-        private Vector3 currentRotation;
-        private Vector3 targetRotation;
-        private Vector2 moveMultiplier;
-        private Vector3 originalPosition;
-        private Quaternion originalRotation;
-
-
-        /**/
-
-
-        #region Setup
+        private Vector3 targetLocalPosition;
 
         private void Start()
         {
-            moveMultiplier = Application.isMobilePlatform ? mobileMoveMultiplier : editorMoveMultiplier;
-            currentRotation = transform.localEulerAngles;
-            targetRotation = currentRotation;
-
-            if (touchDrag == null)
-                Debug.LogWarning("FPSCamera: TouchDrag reference is missing.");
-            
-            originalPosition = transform.localPosition;
-            originalRotation = transform.localRotation;
+            targetLocalPosition = Vector3.zero;
+            transform.localPosition = Vector3.zero;
         }
-
-        #endregion
-
-
-        #region Camera Rotation
 
         private void Update()
         {
-            HandleRotation();
+            if (Application.isMobilePlatform)
+            {
+                HandleMobileCamera();
+            }
+            else
+            {
+                HandleDesktopCamera();
+            }
+
+            // Lerp to target position
+            transform.localPosition = Vector3.Lerp(transform.localPosition, targetLocalPosition, lerpSpeed);
         }
 
-
-        private void HandleRotation()
+        private void HandleMobileCamera()
         {
-            if (touchDrag == null) return;
+            if (fireAnalog == null) return;
 
-            Vector2 rotationInput = touchDrag.GetTouchDragMovement();
-            // if no longer touching, lerp to original position over time
-            if (!touchDrag.GetTouchDragState().Equals(TouchDrag.TouchDragState.touch))
+            Vector2 stickPosition = fireAnalog.GetStickPosition();
+
+            // Apply deadzone - input must exceed threshold to move camera
+            if (stickPosition.magnitude < deadzone)
             {
-                transform.localPosition = Vector3.Lerp(transform.localPosition, originalPosition, Time.deltaTime * smoothness);
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, originalRotation, Time.deltaTime * smoothness);
-                targetRotation = originalRotation.eulerAngles;
-                currentRotation = targetRotation;
-                return;
+                targetLocalPosition = Vector3.zero;
             }
-            
-            if (rotationInput.magnitude < 75f)
+            else
             {
-                return;
+                // Map stick position to camera offset using min/max ranges
+                float xOffset = stickPosition.x < 0 ? stickPosition.x * Mathf.Abs(xMinRange) : stickPosition.x * xMaxRange;
+                float yOffset = stickPosition.y < 0 ? stickPosition.y * Mathf.Abs(yMinRange) : stickPosition.y * yMaxRange;
+                targetLocalPosition = new Vector3(xOffset, yOffset, 0);
             }
-
-            // Apply input multipliers and rotation speed
-            targetRotation.x += rotationInput.y * moveMultiplier.y * rotationSpeed;
-            targetRotation.y += -rotationInput.x * moveMultiplier.x * rotationSpeed;
-
-            // Clamp vertical rotation to prevent flipping
-            targetRotation.x = Mathf.Clamp(targetRotation.x, -90f, 90f);
-
-            // Smoothly interpolate rotation
-            currentRotation = Vector3.Lerp(currentRotation, targetRotation, Time.deltaTime * smoothness);
-            transform.localRotation = Quaternion.Euler(currentRotation);
         }
 
-        #endregion
+        private void HandleDesktopCamera()
+        {
+            // Get mouse position normalized to center of screen (-0.5 to 0.5)
+            Vector2 mousePos = new Vector2(
+                (Input.mousePosition.x / Screen.width) - 0.5f,
+                (Input.mousePosition.y / Screen.height) - 0.5f
+            );
 
-
-        #region Camera Shake
+            // Scale by 2 to convert from (-0.5 to 0.5) to (-1 to 1)
+            Vector2 normalizedMousePos = mousePos * 2f;
+            
+            // Apply deadzone - mouse must be at least halfway from center
+            if (normalizedMousePos.magnitude < deadzone)
+            {
+                targetLocalPosition = Vector3.zero;
+            }
+            else
+            {
+                // Map mouse position to camera offset using min/max ranges
+                float xOffset = normalizedMousePos.x < 0 ? normalizedMousePos.x * Mathf.Abs(xMinRange) : normalizedMousePos.x * xMaxRange;
+                float yOffset = normalizedMousePos.y < 0 ? normalizedMousePos.y * Mathf.Abs(yMinRange) : normalizedMousePos.y * yMaxRange;
+                targetLocalPosition = new Vector3(xOffset, yOffset, 0);
+            }
+        }
 
         public void ShakeCamera()
         {
@@ -119,7 +123,5 @@ namespace MobileControllerFramework
 
             transform.localPosition = originalPosition;
         }
-
-        #endregion
     }
 }
