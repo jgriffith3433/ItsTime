@@ -1,0 +1,20 @@
+fileFormatVersion: 2
+guid: 4535c04e49c634045892313574581533
+timeCreated: 1538652948
+licenseType: Store
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/BillboardMaker/Scripts/RenderBillboard.cs
+  uploadId: 739814

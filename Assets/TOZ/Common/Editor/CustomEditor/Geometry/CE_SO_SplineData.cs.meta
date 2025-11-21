@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: fa427e1524910cf428de27203b03e09e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/Editor/CustomEditor/Geometry/CE_SO_SplineData.cs
+  uploadId: 739814

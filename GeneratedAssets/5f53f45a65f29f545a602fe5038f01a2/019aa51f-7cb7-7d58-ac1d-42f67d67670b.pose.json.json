@@ -1,0 +1,11 @@
+{
+    "asset": "5f53f45a65f29f545a602fe5038f01a2",
+    "fileName": "019aa51f-7cb7-7d58-ac1d-42f67d67670b.pose.json",
+    "prompt": "flips off both hands",
+    "negativePrompt": "",
+    "model": "9e46c009-67d8-4254-a3a0-32e3168247ee",
+    "modelName": "Text to Motion",
+    "customSeed": 1578467164,
+    "w3CTraceId": "5379e279a42e8b3f611c6ccb7c9cc14e",
+    "isTrimmed": false
+}

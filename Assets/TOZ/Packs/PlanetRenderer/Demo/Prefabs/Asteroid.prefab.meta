@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 3bb422cd55d4cee48bf9d963e4d4974e
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Demo/Prefabs/Asteroid.prefab
+  uploadId: 739814

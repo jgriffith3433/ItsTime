@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 17d0a68789fe9004fa2142f3c27b82f1
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Object/Trees/Billboard.shader
+  uploadId: 739814

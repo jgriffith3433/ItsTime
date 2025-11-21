@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3507c0f7cabd12d43b82121a3881dab6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/Editor/Gradients.gradients
+  uploadId: 739814

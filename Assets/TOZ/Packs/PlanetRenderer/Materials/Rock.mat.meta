@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5132ea7cfa53a334a947ff9c7880c4c5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Rock.mat
+  uploadId: 739814

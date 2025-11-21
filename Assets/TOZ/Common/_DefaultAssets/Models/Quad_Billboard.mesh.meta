@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4c351412536cee9419fbc6599eaa7a07
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/Models/Quad_Billboard.mesh
+  uploadId: 739814

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa301e89599e7a147862050c4546490c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Skybox-Starmap.mat
+  uploadId: 739814

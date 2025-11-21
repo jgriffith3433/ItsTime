@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: d8246509d091c5f4ebbe7055c3434d18
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Includes/TOZ_Atmosphere.cginc
+  uploadId: 739814

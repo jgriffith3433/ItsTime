@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 53a34b40baadfac4da94d60755259c7d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/TransparentFX/LensFlares/Flares/Sun-Custom.flare
+  uploadId: 739814

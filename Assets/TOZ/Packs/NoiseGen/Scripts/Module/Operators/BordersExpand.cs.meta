@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 01fd8731124e7864b9120764f7e12f1d
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/NoiseGen/Scripts/Module/Operators/BordersExpand.cs
+  uploadId: 739814

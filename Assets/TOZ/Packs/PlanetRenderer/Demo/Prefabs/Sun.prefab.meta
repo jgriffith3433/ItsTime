@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 43d8153aa4453f245b9d8ca357988b8a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Demo/Prefabs/Sun.prefab
+  uploadId: 739814

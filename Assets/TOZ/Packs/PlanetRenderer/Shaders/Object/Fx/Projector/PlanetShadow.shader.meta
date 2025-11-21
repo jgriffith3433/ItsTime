@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 90b1bec093555c04d9aea0199e707d02
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Object/Fx/Projector/PlanetShadow.shader
+  uploadId: 739814

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4e8f94287a7fc4243806acb0305fc8f5
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/Scripts/CustomAssets/Geometry/SO_Vector3.cs
+  uploadId: 739814

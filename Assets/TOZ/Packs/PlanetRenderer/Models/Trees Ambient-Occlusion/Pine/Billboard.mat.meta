@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ddc6711d4fa4b004fac2ab7a4b774d97
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Models/Trees Ambient-Occlusion/Pine/Billboard.mat
+  uploadId: 739814

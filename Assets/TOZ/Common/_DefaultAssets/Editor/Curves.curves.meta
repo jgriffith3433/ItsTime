@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c288757ff5a5b5c458c79bfd95ecc79a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/Editor/Curves.curves
+  uploadId: 739814

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b024fe2233e58f64eab04472fa135d18
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/Editor/Settings/Mixed Lighting Settings.lighting
+  uploadId: 739814

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 8cb2c1d463c40d6478ac024ae1b55682
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  preprocessorOverride: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Object/Unlit/Sun.shader
+  uploadId: 739814

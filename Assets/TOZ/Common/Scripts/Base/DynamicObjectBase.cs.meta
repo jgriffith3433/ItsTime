@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: cec9634556d008545ab3fd04b6ba9e3c
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/Scripts/Base/DynamicObjectBase.cs
+  uploadId: 739814

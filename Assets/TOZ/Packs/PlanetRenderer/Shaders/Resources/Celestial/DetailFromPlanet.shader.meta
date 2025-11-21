@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3834755ed55e0974a9c73f7b6c55aecd
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Resources/Celestial/DetailFromPlanet.shader
+  uploadId: 739814

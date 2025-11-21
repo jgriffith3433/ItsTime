@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 8b25d32da86058045b8734a6e2bbfc6a
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Models/Trees Ambient-Occlusion/Pine/Pine.prefab
+  uploadId: 739814

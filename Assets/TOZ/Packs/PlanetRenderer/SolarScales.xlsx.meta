@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: d616007d61597ae40aea5f582c4c47f4
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/SolarScales.xlsx
+  uploadId: 739814

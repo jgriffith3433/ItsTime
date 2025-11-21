@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 2d41dac9b7b33144ca2ff674bd20cb52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/Scripts/_Utilities/_VecUtil.cs
+  uploadId: 739814

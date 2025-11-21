@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be07c24a54348e649b0996e9dc7ccc55
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Asteroid.mat
+  uploadId: 739814

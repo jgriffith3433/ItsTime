@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 121f89e34f0b1af448c9e9f45d3a53ce
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Resources/Celestial/SplatFromSpace.shader
+  uploadId: 739814

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9a5954c6c7763404ab9c2b09d17a94b4
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Scripts/Runtime/PlanetTree.cs
+  uploadId: 739814

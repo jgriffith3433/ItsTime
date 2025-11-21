@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 10cfe4d660e542243b6d54fed3ce69a3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Skybox-Milkyway.mat
+  uploadId: 739814

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 087e3d960b501bf49b36528ea42bf153
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Demo/Scenes/Demo.unity
+  uploadId: 739814

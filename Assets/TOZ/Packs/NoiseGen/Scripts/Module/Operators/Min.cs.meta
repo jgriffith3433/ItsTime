@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 721ab9c1a6965154e9ce7283017f65a7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/NoiseGen/Scripts/Module/Operators/Min.cs
+  uploadId: 739814

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: be63b9b1163db9f45bf1f976b7f702a5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Sun.mat
+  uploadId: 739814

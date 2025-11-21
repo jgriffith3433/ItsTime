@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 430c00dd0ce6e774e930c4ab3bd3a1d2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Editor/CustomEditor/CE_Star.cs
+  uploadId: 739814

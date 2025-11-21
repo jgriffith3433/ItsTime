@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bbd8af4a1c28768418dbe829d8636c34
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/AsteroidBillboard.mat
+  uploadId: 739814

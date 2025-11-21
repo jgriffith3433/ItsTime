@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 808b3d6153abf2544b1a88fdac80e43a
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Object/Trees/TreeBark.shader
+  uploadId: 739814

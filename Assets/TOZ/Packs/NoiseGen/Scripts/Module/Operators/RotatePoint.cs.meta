@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: d6e17862361ec1e4db8fe90fde31209a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/NoiseGen/Scripts/Module/Operators/RotatePoint.cs
+  uploadId: 739814

@@ -9,7 +9,7 @@ namespace MobileControllerFramework
     * NOTE:
     * This component uses Unity's EventSystem (Pointer Events).
     * It works out of the box with both the Old Input Manager
-    * and the New Input System — no additional setup required.
+    * and the New Input System ï¿½ no additional setup required.
     */
 
 
@@ -49,7 +49,12 @@ namespace MobileControllerFramework
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            if (touchDragState != TouchDragState.normal) return;
+            
+            if (touchDragState != TouchDragState.normal)
+            {
+                Debug.LogWarning($"[TouchDrag] OnPointerDown blocked - current state: {touchDragState}");
+                return;
+            }
 
             touchStartPosition = eventData.position;
             movementFromTouch = Vector2.zero;
@@ -61,7 +66,11 @@ namespace MobileControllerFramework
 
         public void OnDrag(PointerEventData eventData)
         {
-            if (touchDragState != TouchDragState.touch) return;
+            if (touchDragState != TouchDragState.touch)
+            {
+                Debug.LogWarning($"[TouchDrag] OnDrag blocked - current state: {touchDragState}");
+                return;
+            }
 
             movementFromTouch = eventData.position - touchStartPosition;
         }
@@ -73,7 +82,11 @@ namespace MobileControllerFramework
 
         private void PointerUp()
         {
-            if (touchDragState != TouchDragState.touch) return;
+            if (touchDragState != TouchDragState.touch)
+            {
+                Debug.LogWarning($"[TouchDrag] PointerUp blocked - current state: {touchDragState}");
+                return;
+            }
 
             touchDragState = TouchDragState.normal;
             movementFromTouch = Vector2.zero;

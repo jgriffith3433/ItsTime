@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c49ee3435eefc49429ff63c90aa1fd13
+timeCreated: 1538657142
+licenseType: Store
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/BillboardMaker/Scenes/BillboardMaker.unity
+  uploadId: 739814

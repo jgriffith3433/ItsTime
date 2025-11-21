@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 134e0055c9d9b46418ad59f54c115d64
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Resources/Celestial/AtmosphereFromPlanet.shader
+  uploadId: 739814

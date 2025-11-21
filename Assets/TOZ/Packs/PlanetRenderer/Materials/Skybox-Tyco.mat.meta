@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 829abd5c47f1d4f4b9d6c2b5bcfd4e72
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Materials/Skybox-Tyco.mat
+  uploadId: 739814

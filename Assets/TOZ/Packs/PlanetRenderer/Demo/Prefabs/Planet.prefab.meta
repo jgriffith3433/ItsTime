@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: ced775376b9d91f46875c4cd3ecbf7c6
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Demo/Prefabs/Planet.prefab
+  uploadId: 739814

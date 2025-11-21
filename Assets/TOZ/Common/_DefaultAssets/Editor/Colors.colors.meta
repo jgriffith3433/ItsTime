@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: caa3104691a10244597e0f355c23b1fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Common/_DefaultAssets/Editor/Colors.colors
+  uploadId: 739814

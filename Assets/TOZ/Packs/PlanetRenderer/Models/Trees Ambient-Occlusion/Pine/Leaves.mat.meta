@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c3461df6c8ebb7449ba42106f6f42025
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Models/Trees Ambient-Occlusion/Pine/Leaves.mat
+  uploadId: 739814

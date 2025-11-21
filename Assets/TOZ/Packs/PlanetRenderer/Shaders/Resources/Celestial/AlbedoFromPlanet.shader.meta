@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 1fd15a66382c9d048acf9acf18defc3b
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Resources/Celestial/AlbedoFromPlanet.shader
+  uploadId: 739814

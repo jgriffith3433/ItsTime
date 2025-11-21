@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3076f3f2134886c46b87c8723c2e9f38
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures: []
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 122275
+  packageName: TOZ Planet Renderer
+  packageVersion: 2.4
+  assetPath: Assets/TOZ/Packs/PlanetRenderer/Shaders/Resources/Celestial/WaterFromSpace.shader
+  uploadId: 739814
